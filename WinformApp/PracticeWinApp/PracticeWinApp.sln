@@ -11,6 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagWInApp", "..\FlagWInApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckBoxWinAPp", "..\CheckBoxWinAPp\CheckBoxWinAPp.csproj", "{01427B13-40AC-428C-8584-7025A40D7F0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioWinApp", "..\RadioWinApp\RadioWinApp.csproj", "{5BD6114D-5A30-4631-916E-0369599766F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginApp", "..\LoginApp\LoginApp.csproj", "{6E82F6E7-F73F-4DB6-AEC7-D9DB43EA06F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaskedTextApp", "..\MaskedTextApp\MaskedTextApp.csproj", "{5F90C6A5-1214-402F-933D-59CAA69511D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorChangerApp", "..\ColorChangerApp\ColorChangerApp.csproj", "{A5BFB485-6ACF-4D48-A307-DF6D01C3EE4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +41,22 @@ Global
 		{01427B13-40AC-428C-8584-7025A40D7F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01427B13-40AC-428C-8584-7025A40D7F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01427B13-40AC-428C-8584-7025A40D7F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BD6114D-5A30-4631-916E-0369599766F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BD6114D-5A30-4631-916E-0369599766F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BD6114D-5A30-4631-916E-0369599766F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BD6114D-5A30-4631-916E-0369599766F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E82F6E7-F73F-4DB6-AEC7-D9DB43EA06F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E82F6E7-F73F-4DB6-AEC7-D9DB43EA06F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E82F6E7-F73F-4DB6-AEC7-D9DB43EA06F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E82F6E7-F73F-4DB6-AEC7-D9DB43EA06F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F90C6A5-1214-402F-933D-59CAA69511D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F90C6A5-1214-402F-933D-59CAA69511D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F90C6A5-1214-402F-933D-59CAA69511D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F90C6A5-1214-402F-933D-59CAA69511D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BFB485-6ACF-4D48-A307-DF6D01C3EE4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BFB485-6ACF-4D48-A307-DF6D01C3EE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BFB485-6ACF-4D48-A307-DF6D01C3EE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BFB485-6ACF-4D48-A307-DF6D01C3EE4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
