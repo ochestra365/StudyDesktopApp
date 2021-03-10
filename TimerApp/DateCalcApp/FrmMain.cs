@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TimerClock
+namespace DateCalcApp
 {
     public partial class FrmMain : Form
     {
@@ -17,14 +17,13 @@ namespace TimerClock
             InitializeComponent();
         }
 
-        private void FrmMain_Load(object sender, EventArgs e)
+        private void DtpBirthDay_ValueChanged(object sender, EventArgs e)
         {
-            MyTimer.Start();
-        }
+            DateTime today = DateTime.Today;
+            DateTime birthday = DtpBirthDay.Value;
 
-        private void MyTimer_Tick(object sender, EventArgs e)
-        {
-            LblClock.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            TxtResult.Text = $"{today.Subtract(birthday).TotalDays:#,###}";
+            TxtYear.Text = (today.Subtract(birthday).TotalDays / 365).ToString("0");
         }
     }
 }

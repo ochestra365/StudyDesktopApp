@@ -31,7 +31,7 @@ namespace TimerClock
         {
             this.components = new System.ComponentModel.Container();
             this.LblClock = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.MyTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // LblClock
@@ -44,6 +44,12 @@ namespace TimerClock
             this.LblClock.TabIndex = 0;
             this.LblClock.Text = "2021-03-10 16:17:20\r\n";
             // 
+            // MyTimer
+            // 
+            this.MyTimer.Enabled = true;
+            this.MyTimer.Interval = 1000;
+            this.MyTimer.Tick += new System.EventHandler(this.MyTimer_Tick);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -55,6 +61,7 @@ namespace TimerClock
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "디지털 시계";
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -63,7 +70,7 @@ namespace TimerClock
         #endregion
 
         private System.Windows.Forms.Label LblClock;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer MyTimer;
     }
 }
 
