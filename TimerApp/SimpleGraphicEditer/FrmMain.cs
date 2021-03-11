@@ -133,7 +133,6 @@ namespace SimpleGraphicEditer
         {
             this.mode = DrawMode.CIRCLE;
             StsCurrent.Text = "Circle Mode";
-
         }
 
         private void TlmCurvedLine_Click(object sender, EventArgs e)
