@@ -56,6 +56,79 @@ namespace SimpleGraphicEditer
             StsCurrent.Text = "Rectangle Mode";
         }
 
+        private void FrmMain_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.startP = new Point(e.X, e.Y);
+            this.prevP = this.startP;
+            this.currP = this.prevP = this.startP;
+        }
+
+        private void FrmMain_Move(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FrmMain_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.endP = new Point(e.X, e.Y);
+            switch (this.mode)
+            {
+                case DrawMode.LINE:
+                    g.DrawLine(this.pen, this.startP, this.endP);
+                    break;
+                case DrawMode.RECTANGLE:
+                    g.DrawRectangle(this.pen,
+                        new Rectangle(startP, new Size(endP.X - startP.X, endP.Y - startP.Y)));
+                    break;
+                case DrawMode.CIRCLE:
+                    g.DrawEllipse(this.pen,
+                        new Rectangle(startP, new Size(endP.X - startP.X, endP.Y - startP.Y)));
+                    break;
+                case DrawMode.CURVED_LINE:
+                    break;
+                default:
+                    break;
+            }
+        }
+        /// <summary>
+        /// 마우스 옮길때마다 발생한다.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmMain_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return;
+
+            this.prevP = this.currP;
+            this.currP = new Point(e.X, e.Y);
+
+            switch (this.mode)
+            {
+                case DrawMode.LINE:
+                    g.DrawLine(this.eraser, this.startP, this.prevP);
+                    g.DrawLine(this.pen, this.startP, this.currP);
+                    break;
+                case DrawMode.RECTANGLE:
+                    g.DrawRectangle(this.eraser, new Rectangle(startP, new Size(prevP.X-startP.X,
+                        prevP.Y-startP.Y)));
+
+                    g.DrawRectangle(this.pen, new Rectangle(startP, new Size(currP.X - currP.X,
+                       currP.Y - currP.Y)));
+                    break;
+                case DrawMode.CIRCLE:
+                    g.DrawEllipse(this.eraser, new Rectangle(startP, new Size(prevP.X - startP.X,
+                     prevP.Y - startP.Y)));
+
+                    g.DrawEllipse(this.pen, new Rectangle(startP, new Size(currP.X - currP.X,
+                       currP.Y - currP.Y)));
+                    break;
+                case DrawMode.CURVED_LINE:
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void TlmCircle_Click(object sender, EventArgs e)
         {
             this.mode = DrawMode.CIRCLE;
