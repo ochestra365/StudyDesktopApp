@@ -49,7 +49,7 @@ namespace SimpleGraphicEditer
             this.mode = DrawMode.LINE;
             StsCurrent.Text = "Line Mode";
         }
-
+        //d
         private void TlmRecSquare_Click(object sender, EventArgs e)
         {
             this.mode = DrawMode.RECTANGLE;
