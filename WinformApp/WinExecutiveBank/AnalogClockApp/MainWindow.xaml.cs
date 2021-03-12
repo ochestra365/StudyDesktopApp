@@ -61,7 +61,8 @@ namespace AnalogClockApp
 
         private void DrawHands(double radHour, double radMin, double radSec)
         {    //초침
-            DrawLine(SecHand * Math.Sin(radSec), -SecHand * Math.Cos(radSec), 0, 0, Brushes.OrangeRed, 3,
+            DrawLine(SecHand * Math.Sin(radSec), -SecHand * Math.Cos(radSec), 0, 0, Brushes
+                .OrangeRed, 3,
                 new Thickness(Center.X, Center.Y, 0, 0));
             //분침
             DrawLine(MinHand * Math.Sin(radMin), -SecHand * Math.Cos(radMin), 0, 0,
