@@ -34,7 +34,24 @@ namespace MyNotepadApp
 
         private void MnuOpenFile_Click(object sender, EventArgs e)
         {
+            ProcessSaveBeforeClose();
 
+            DlgOpenText.ShowDialog();
+            currfileName = DlgOpenText.FileName;
+            this.Text = this.Text = $"{currfileName}-내 메모장";
+
+            try
+            {
+                StreamReader sr = File.OpenText(currfileName);
+                TxtMain.Text = sr.ReadToEnd();
+
+                isModify = false;
+                sr.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ProcessSaveBeforeClose()
@@ -90,22 +107,35 @@ namespace MyNotepadApp
 
         private void MnuCopy_Click(object sender, EventArgs e)
         {
-
+            var contents = ActiveControl as RichTextBox;
+            if (contents != null)
+            {
+                Clipboard.SetDataObject(contents.SelectedText);
+                MessageBox.Show(contents.SelectedText);
+            }
         }
 
         private void MnuPath_Click(object sender, EventArgs e)
         {
-
+            var conteets = ActiveControl as RichTextBox;
+            if (conteets != null)
+            {
+                IDataObject data = Clipboard.GetDataObject();
+                conteets.SelectedText = data.GetData(DataFormats.Text).ToString();
+                isModify = true;
+            }
         }
 
         private void MnuAbout_Click(object sender, EventArgs e)
         {
-
+            //MessageBox.Show("메모장 v1.0입니다.");
+            var form = new AboutThis();
+            form.ShowDialog();
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            DlgSaveText.Filter = "Text file(*.txt)|*.txt|Log file(*.log)|*.log";
+            DlgSaveText.Filter= DlgOpenText.Filter = "Text file(*.txt)|*.txt|Log file(*.log)|*.log";
             this.Text = $"{currfileName}-내 메모장";
             isModify = false;
         }

@@ -153,10 +153,6 @@ namespace MyNotepadApp
             this.MnuAbout.Text = "덤벼랏!(&Attakc!)";
             this.MnuAbout.Click += new System.EventHandler(this.MnuAbout_Click);
             // 
-            // DlgOpenText
-            // 
-            this.DlgOpenText.FileName = "openFileDialog1";
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
