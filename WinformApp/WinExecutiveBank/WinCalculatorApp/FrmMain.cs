@@ -79,5 +79,37 @@ namespace WinCalculatorApp
             OpFalg = false;
             PercentFlag = false;
         }
+
+        private void BtnMC_Click(object sender, EventArgs e)
+        {
+            TxtResult.Text = "";
+            Memory = 0;
+            BtnMR.Enabled = BtnMC.Enabled = false;
+        }
+
+        private void BtnMR_Click(object sender, EventArgs e)
+        {
+            TxtResult.Text = Memory.ToString();
+            MemFlag = true;
+        }
+
+        private void BtnMplus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnMminus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnMs_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(TxtResult.Text)) return;
+
+            Memory = double.Parse(TxtResult.Text);
+            BtnMC.Enabled = BtnMR.Enabled = true;
+            MemFlag = true;
+        }
     }
 }

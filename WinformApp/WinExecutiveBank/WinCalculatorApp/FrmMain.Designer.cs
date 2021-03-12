@@ -84,6 +84,7 @@ namespace WinCalculatorApp
             this.BtnMC.TabIndex = 1;
             this.BtnMC.Text = "MC";
             this.BtnMC.UseVisualStyleBackColor = true;
+            this.BtnMC.Click += new System.EventHandler(this.BtnMC_Click);
             // 
             // BtnCe
             // 
@@ -110,6 +111,7 @@ namespace WinCalculatorApp
             this.BtnMR.TabIndex = 1;
             this.BtnMR.Text = "MR";
             this.BtnMR.UseVisualStyleBackColor = true;
+            this.BtnMR.Click += new System.EventHandler(this.BtnMR_Click);
             // 
             // BtnMplus
             // 
@@ -122,6 +124,7 @@ namespace WinCalculatorApp
             this.BtnMplus.TabIndex = 1;
             this.BtnMplus.Text = "M+";
             this.BtnMplus.UseVisualStyleBackColor = true;
+            this.BtnMplus.Click += new System.EventHandler(this.BtnMplus_Click);
             // 
             // BtnMminus
             // 
@@ -134,6 +137,7 @@ namespace WinCalculatorApp
             this.BtnMminus.TabIndex = 1;
             this.BtnMminus.Text = "M-";
             this.BtnMminus.UseVisualStyleBackColor = true;
+            this.BtnMminus.Click += new System.EventHandler(this.BtnMminus_Click);
             // 
             // BtnMs
             // 
@@ -146,6 +150,7 @@ namespace WinCalculatorApp
             this.BtnMs.TabIndex = 1;
             this.BtnMs.Text = "MS";
             this.BtnMs.UseVisualStyleBackColor = true;
+            this.BtnMs.Click += new System.EventHandler(this.BtnMs_Click);
             // 
             // BtnPercent
             // 
