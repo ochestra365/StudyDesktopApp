@@ -31,7 +31,7 @@ namespace AddressInfoApp
             int.TryParse(TxtIdx.Text, out int result);
             if (result == 0)
             {
-                MessageBox.Show("삭제하려면 데이터를 선택");
+                MessageBox.Show("수정하려면 데이터를 선택.");
                 return;
             }
 
@@ -66,6 +66,19 @@ namespace AddressInfoApp
 
         private void BtnInsert_Click(object sender, EventArgs e)
         {
+            int.TryParse(TxtIdx.Text, out int result);
+            if (result > 0)
+            {
+                MessageBox.Show("초기화를 하십시오.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(TxtFullName.Text) || string.IsNullOrEmpty(MskMobile.Text))
+            {
+                MessageBox.Show("값을 입력하세요.");
+                return;
+            }
+
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 if (conn.State == ConnectionState.Closed)
