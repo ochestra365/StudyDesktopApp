@@ -105,6 +105,7 @@ namespace IoTSensorMonApp
             this.MnuExit.Name = "MnuExit";
             this.MnuExit.Size = new System.Drawing.Size(180, 22);
             this.MnuExit.Text = "종료(&X)";
+            this.MnuExit.Click += new System.EventHandler(this.MnuExit_Click);
             // 
             // 시뮬레이션SToolStripMenuItem
             // 
@@ -120,12 +121,14 @@ namespace IoTSensorMonApp
             this.MnuBeginSimulation.Name = "MnuBeginSimulation";
             this.MnuBeginSimulation.Size = new System.Drawing.Size(180, 22);
             this.MnuBeginSimulation.Text = "시작(&B)";
+            this.MnuBeginSimulation.Click += new System.EventHandler(this.MnuBeginSimulation_Click);
             // 
             // MnuendSimulation
             // 
             this.MnuendSimulation.Name = "MnuendSimulation";
             this.MnuendSimulation.Size = new System.Drawing.Size(180, 22);
             this.MnuendSimulation.Text = "끝(&E)";
+            this.MnuendSimulation.Click += new System.EventHandler(this.MnuendSimulation_Click);
             // 
             // LblConnecTime
             // 
