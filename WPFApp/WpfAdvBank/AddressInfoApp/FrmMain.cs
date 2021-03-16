@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AddressInfoApp
@@ -15,6 +9,8 @@ namespace AddressInfoApp
     {
         string connString = "Data Source=127.0.0.1;Initial Catalog=PMS;Persist Security Info=True;" +
             "User ID=sa; Password=mssql_p@ssw0rd!";
+        //가장 중요한 것이다. DB에 접근하는 경로이기 때문이다. 지금은 소스상에 박아놨지만 다음에는 다른 설정파일
+        //넣을 수 있다. 소스가 바뀌면 개발자가 아니면 컴파일을 하기 어렵다. 보안적인 취약점이 발생할 수 있다.
 
         public FrmMain()
         {
@@ -25,7 +21,7 @@ namespace AddressInfoApp
         {
             ClearInput();
         }
-
+        #region
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
             int.TryParse(TxtIdx.Text, out int result);
@@ -119,22 +115,25 @@ namespace AddressInfoApp
                 MessageBox.Show("삭제하려면 데이터를 선택");
                 return;
             }
-
-            using(SqlConnection conn=new SqlConnection(connString))
-            {
-                if (conn.State == ConnectionState.Closed)
-                    conn.Open();
-
-                string query = $"DELETE FROM Address WHERE idx = {result}";
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-                if (cmd.ExecuteNonQuery() == 1)
+            if(MessageBox.Show("삭제하시겠습니까?", "삭제",MessageBoxButtons.YesNo,MessageBoxIcon.Question)
+                == DialogResult.Yes)
+            { 
+                using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    MessageBox.Show("삭제 성공");
-                }
-                else
-                {
-                    MessageBox.Show("삭제 실패!");
+                    if (conn.State == ConnectionState.Closed)
+                        conn.Open();
+
+                    string query = $"DELETE FROM Address WHERE idx = {result}";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    if (cmd.ExecuteNonQuery() == 1)
+                    {
+                        MessageBox.Show("삭제 성공!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("삭제 실패!");
+                    }
                 }
             }
             ClearInput();
@@ -193,7 +192,7 @@ namespace AddressInfoApp
                 DgvAddress.DataSource = ds.Tables[0];
             }
         }
-
+        #endregion//CURD구현부분
         private void ClearInput()
         {
             TxtIdx.Text = TxtFullName.Text = MskMobile.Text = TxtAddr.Text = "";
