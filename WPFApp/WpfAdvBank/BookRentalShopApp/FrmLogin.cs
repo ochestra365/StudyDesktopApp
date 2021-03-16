@@ -44,6 +44,8 @@ namespace BookRentalShopApp
 
                     //SqlCommand 생성
                     SqlCommand cmd = new SqlCommand();
+                    //SQLInjection 해킹 막기 위해서 사용하는 부분이다.
+                    SqlParameter param;
                     //SqlDataReader 실행(1)
                     SqlDataReader reader = cmd.ExecuteReader();
                     //reader로 처리..
