@@ -47,7 +47,7 @@ namespace IoTSensorMonApp
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.PrbPhotoResister = new System.Windows.Forms.ProgressBar();
             this.LsbPhotoResisters = new System.Windows.Forms.ListBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ComboBox1 = new System.Windows.Forms.GroupBox();
             this.CboSeriealPort = new System.Windows.Forms.ComboBox();
             this.BtnConnect = new System.Windows.Forms.Button();
             this.BtnDisconnect = new System.Windows.Forms.Button();
@@ -57,7 +57,7 @@ namespace IoTSensorMonApp
             this.BtnZoom = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.ComboBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChtPhotoResisters)).BeginInit();
             this.SuspendLayout();
             // 
@@ -167,34 +167,33 @@ namespace IoTSensorMonApp
             // 
             // LsbPhotoResisters
             // 
+            this.LsbPhotoResisters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LsbPhotoResisters.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.LsbPhotoResisters.FormattingEnabled = true;
             this.LsbPhotoResisters.ItemHeight = 15;
             this.LsbPhotoResisters.Location = new System.Drawing.Point(15, 148);
             this.LsbPhotoResisters.Name = "LsbPhotoResisters";
             this.LsbPhotoResisters.ScrollAlwaysVisible = true;
-            this.LsbPhotoResisters.Size = new System.Drawing.Size(316, 94);
+            this.LsbPhotoResisters.Size = new System.Drawing.Size(316, 92);
             this.LsbPhotoResisters.TabIndex = 4;
             // 
-            // groupBox2
+            // ComboBox1
             // 
-            this.groupBox2.Controls.Add(this.BtnDisplay);
-            this.groupBox2.Controls.Add(this.BtnDisconnect);
-            this.groupBox2.Controls.Add(this.BtnConnect);
-            this.groupBox2.Controls.Add(this.CboSeriealPort);
-            this.groupBox2.Font = new System.Drawing.Font("맑은 고딕", 9F);
-            this.groupBox2.Location = new System.Drawing.Point(350, 47);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(134, 204);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Port";
+            this.ComboBox1.Controls.Add(this.BtnDisplay);
+            this.ComboBox1.Controls.Add(this.BtnDisconnect);
+            this.ComboBox1.Controls.Add(this.BtnConnect);
+            this.ComboBox1.Controls.Add(this.CboSeriealPort);
+            this.ComboBox1.Font = new System.Drawing.Font("맑은 고딕", 9F);
+            this.ComboBox1.Location = new System.Drawing.Point(350, 47);
+            this.ComboBox1.Name = "ComboBox1";
+            this.ComboBox1.Size = new System.Drawing.Size(134, 204);
+            this.ComboBox1.TabIndex = 5;
+            this.ComboBox1.TabStop = false;
+            this.ComboBox1.Text = "Port";
             // 
             // CboSeriealPort
             // 
             this.CboSeriealPort.FormattingEnabled = true;
-            this.CboSeriealPort.Items.AddRange(new object[] {
-            "COM1"});
             this.CboSeriealPort.Location = new System.Drawing.Point(25, 21);
             this.CboSeriealPort.Name = "CboSeriealPort";
             this.CboSeriealPort.Size = new System.Drawing.Size(76, 23);
@@ -274,7 +273,7 @@ namespace IoTSensorMonApp
             this.Controls.Add(this.BtnZoom);
             this.Controls.Add(this.BtnViewAll);
             this.Controls.Add(this.ChtPhotoResisters);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.ComboBox1);
             this.Controls.Add(this.LsbPhotoResisters);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.TxtSenSorNumj);
@@ -287,10 +286,11 @@ namespace IoTSensorMonApp
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IoT Photoresister Monitoring";
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.ComboBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ChtPhotoResisters)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -313,7 +313,7 @@ namespace IoTSensorMonApp
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ProgressBar PrbPhotoResister;
         private System.Windows.Forms.ListBox LsbPhotoResisters;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox ComboBox1;
         private System.Windows.Forms.ComboBox CboSeriealPort;
         private System.Windows.Forms.Button BtnDisplay;
         private System.Windows.Forms.Button BtnDisconnect;
