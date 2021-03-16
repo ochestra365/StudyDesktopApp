@@ -18,5 +18,5 @@ C# 데스크톱 앱 개발 학습 리포지터리
 6. ![WinformApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/WinformApp)<br>
 -------------
 ###ListViewApp 구동화면!<br>
-리스트
+리스트 화면이다.<br>
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%EB%A6%AC%EC%8A%A4%ED%8A%B8.png" width="40%" height="30%" ><br>
