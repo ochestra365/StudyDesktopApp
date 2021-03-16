@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
@@ -14,7 +16,16 @@ namespace IoTSensorMonApp
 {
     public partial class FrmMain : Form
     {
+        private Timer timerSimul = new Timer();
+        private Random randPhoto = new Random();
+        private bool IsSimulation = false;
+        private List<SensorData> sensors = new List<SensorData>();//차트, 리스트박스에 계속 출력됨.
         private double xCount = 200;//차트에 보이는 데이터 수.
+        private string connString = " Data Source=127.0.0.1; " +
+                                    " Initial Catalog=IoTData; " +
+                                    " Persist Security Info=True; " +
+                                    " User ID=sa; " +
+                                    " Password=mssql_p@ssw0rd!" ;
         public FrmMain()
         {
             InitializeComponent();
@@ -96,11 +107,6 @@ namespace IoTSensorMonApp
             //TODO 나중에 실제 작업시 작성
         }
 
-        private Timer timerSimul = new Timer();
-        private Random randPhoto = new Random();
-        private bool IsSimulation = false;
-        private List<SensorData> sensors = new List<SensorData>();//차트, 리스트박스에 계속 출력됨.
-
         /// <summary>
         /// 시뮬레이션 시작
         /// </summary>
@@ -130,6 +136,7 @@ namespace IoTSensorMonApp
             var currentTime = DateTime.Now;
             SensorData data = new SensorData(currentTime, v, IsSimulation);
             sensors.Add(data);
+            InsertTable(data);
 
             // 센서값 갯수
             TxtSenSorNumj.Text = $"{sensors.Count}";
@@ -143,6 +150,51 @@ namespace IoTSensorMonApp
 
             //차트에 데이터 출력-->흐르는 데이터는 항상 흘러줘야 한다. 출력은 잘된다.
             ChtPhotoResisters.Series[0].Points.Add(v);
+
+            //200개 넘으면 
+            ChtPhotoResisters.ChartAreas[0].AxisX.Minimum = 0;
+            ChtPhotoResisters.ChartAreas[0].AxisX.Maximum = (sensors.Count >= xCount) ? sensors.Count : xCount;
+
+            // Zoom 처리 
+            if (sensors.Count > xCount)
+                ChtPhotoResisters.ChartAreas[0].AxisX.ScaleView.Zoom(sensors.Count - xCount, sensors.Count);
+            else
+                ChtPhotoResisters.ChartAreas[0].AxisX.ScaleView.Zoom(0, xCount);
+
+            // BtnDisplay 표시
+            if (IsSimulation)
+                BtnDisplay.Text = v.ToString();
+            else
+                BtnDisplay.Text = "~" + "\n" + v.ToString();
+        }
+        /// <summary>
+        /// IoT데이터베이스 내에 있는 Tbl_PhotoResister 테이블에 센서데이터 입력
+        /// </summary>
+        /// <param name="data"></param>
+        private void InsertTable(SensorData data)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))//sql과의 연결을 터준다.
+                {
+                    if (conn.State == ConnectionState.Closed)//파라미터의 상태값이 연결된 상태의 닫힌 값과 같으면
+                        conn.Open();//참일 때 sql커넥션 연결을 튼다. 거짓은 필요없다. 오로지 측정된 참값만 넣으니까
+
+                    var query = $" insert into Tbl_PhotoResister " +
+                                $" (CurrentDt, value, SimulFlag) " +
+                                $" values " +
+                                $" ('{data.Current.ToString("yyyy-MM-dd HH:mm:ss")}','{data.Value}','{(data.SimulFlag==true ? "1" : "0")}'); ";
+                    //sql로 옮기면서 해당 부분의 데이터 타입이 1,0 출력이 아닌 true,false부분으로 나뉜다.
+                    //value뒷부분은 쿼리문에서 들어가는 실제 데이터값에 해당하면 이를 측정하여 날리는 경로는 C#에서 한다.
+                    //라즈베리파이에서 측정한 값을 C#에서 측정하고, 이를 query 문자데이터타입으로 ssms에 날려서 기입하게 만든다.
+                    SqlCommand cmd = new SqlCommand(query, conn);//cmd라는 것은 쿼리문 날린 것을 연결해주는 클래스(기능)을 의미한다.
+                    cmd.ExecuteNonQuery(); //메서드 연산을 호출해 주는 곳이 없으니 여기서 호출해준다.
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"예외발생 : {ex.Message}");//오류가 발생하면 디버그를 하고 메세지를 사용자에게 알린다.
+            }
         }
 
         /// <summary>
@@ -171,6 +223,24 @@ namespace IoTSensorMonApp
             }
 
             Environment.Exit(0);
+        }
+
+        private void BtnViewAll_Click(object sender, EventArgs e)
+        {
+            ChtPhotoResisters.ChartAreas[0].AxisX.Minimum = 0;
+            ChtPhotoResisters.ChartAreas[0].AxisX.Maximum = sensors.Count;
+
+            ChtPhotoResisters.ChartAreas[0].AxisX.ScaleView.Zoom(0, sensors.Count);
+            ChtPhotoResisters.ChartAreas[0].AxisX.Interval = sensors.Count / 4;
+        }
+
+        private void BtnZoom_Click(object sender, EventArgs e)
+        {
+            ChtPhotoResisters.ChartAreas[0].AxisX.Minimum = 0;
+            ChtPhotoResisters.ChartAreas[0].AxisX.Maximum = sensors.Count;
+
+            ChtPhotoResisters.ChartAreas[0].AxisX.ScaleView.Zoom(sensors.Count-xCount, sensors.Count);
+            ChtPhotoResisters.ChartAreas[0].AxisX.Interval = xCount / 4;
         }
     }
 }
