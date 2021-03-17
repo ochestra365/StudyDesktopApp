@@ -56,6 +56,7 @@ namespace BookRentalShopApp
                     //reader로 처리..
                     reader.Read();
                     strUserId = reader["userID"] != null ? reader["userID"].ToString() : "";
+                    reader.Close();//1
                     // 확인MessageBox.Show(strUserId);
                     if (string.IsNullOrEmpty(strUserId))
                     {
@@ -64,6 +65,12 @@ namespace BookRentalShopApp
                     }
                     else
                     {
+                        var updateQuery = $@"UPDATE membertbl SET
+                                              lastLoginDt = GETDATE()
+                                              ,loginIpAddr = '{Helper.Common.GetLocalIP()}';   
+                                              WHERE userId ='{strUserId}' ";//로그인 정보 남기기
+                        cmd.CommandText = updateQuery;
+                        cmd.ExecuteNonQuery();
                         MetroMessageBox.Show(this, "접속성공", "로그인실패", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();//닫아주고 메인 화면만 쓸 수 있게 해주는 것이다!
                     }

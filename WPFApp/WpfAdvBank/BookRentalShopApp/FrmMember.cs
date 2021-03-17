@@ -13,21 +13,25 @@ namespace BookRentalShopApp
         {
             InitializeComponent();
         }
-
         #region 전역변수
         private bool IsNew { get; set; }//수정, false 신규
         #endregion 전역변수 영역
         #region 이벤트 영역
-        private void DgvData_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvData_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex > -1)//선택된 값이 존재하면
             {
                 var selData = DgvData.Rows[e.RowIndex];
-                TxtDivision.Text = selData.Cells[0].Value.ToString();
+                TxtIdx.Text = selData.Cells[0].Value.ToString();
                 TxtNames.Text = selData.Cells[1].Value.ToString();
-                TxtDivision.ReadOnly = true;
+                CboLevels.SelectedItem = selData.Cells[2].Value;
 
-                IsNew = false;//수정
+                TxtAddr.Text = selData.Cells[3].Value.ToString();
+                TxtMobile.Text = selData.Cells[4].Value.ToString();
+                TxtEmail.Text = selData.Cells[5].Value.ToString();
+                TxtUserId.Text = selData.Cells[6].Value.ToString();
+                TxtIdx.ReadOnly = true;
+                IsNew = false;
             }
         }
         private void BtnNew_Click(object sender, EventArgs e)
@@ -43,7 +47,6 @@ namespace BookRentalShopApp
             RefreshData();
             ClearInput();
         }
-        
 
         private void FrmDivCode_Load(object sender, EventArgs e)
         {
@@ -74,14 +77,21 @@ namespace BookRentalShopApp
         /// </summary>
         private void ClearInput()
         {
-            TxtDivision.Text = TxtNames.Text = "";
-            TxtDivision.ReadOnly = false;
+            TxtIdx.Text = TxtNames.Text = "";
+            TxtMobile.Text = TxtAddr.Text = TxtEmail.Text = "";
+            TxtUserId.Text = "";
+            TxtPasswords.Text = "";
+            CboLevels.SelectedIndex = -1;
+            TxtIdx.ReadOnly = true;
             IsNew = true;
         }
 
         private bool CheckValidation()
         {
-            if (string.IsNullOrEmpty(TxtDivision.Text) || string.IsNullOrEmpty(TxtNames.Text))
+            if (string.IsNullOrEmpty(TxtIdx.Text) || string.IsNullOrEmpty(TxtNames.Text)||
+                string.IsNullOrEmpty(TxtAddr.Text)||string.IsNullOrEmpty(TxtMobile.Text)||
+                string.IsNullOrEmpty(TxtEmail.Text)||CboLevels.SelectedIndex==-1||
+                string.IsNullOrEmpty(TxtUserId.Text))
             {
                 MetroMessageBox.Show(this, "빈값삭제불가", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -103,21 +113,14 @@ namespace BookRentalShopApp
 
                     if (IsNew == true)
                     {
-                        query = " INSERT INTO [dbo].[divtbl] " +
-                            " VALUES " +
-                            " (@Division, @Names) ";
-                    }
-                    else
-                    {
-                        query = "UPDATE [dbo].[divtbl]" +
-                  " SET [Names] = @Names " +
-                  " WHERE [Division] = @Division ";//쿼리 날린다.
-                    }
+                    query = " DELETE INTO [dbo].[membertbl] " +
+                            " WHERE [Idx]=@Idx ";
                     cmd.CommandText = query;
+                    }
 
-                    SqlParameter pDivision = new SqlParameter("@Division", SqlDbType.NVarChar, 8);
-                    pDivision.Value = TxtNames.Text;
-                    cmd.Parameters.Add(pDivision);
+                    SqlParameter pIdx = new SqlParameter("@Idx", SqlDbType.Int);
+                    pIdx.Value = TxtNames.Text;
+                    cmd.Parameters.Add(pIdx);
 
                     var result = cmd.ExecuteNonQuery();
                     if (result == 1)
@@ -145,16 +148,23 @@ namespace BookRentalShopApp
                 using (SqlConnection conn = new SqlConnection(Helper.Common.ConnString))//파라미터를 핼퍼 폴더를 통해서 연결해준다.(파라미터 뿐만이 아니라 자세한 지시사항도 해당되는 듯하다.)
                 {
                     if (conn.State == ConnectionState.Closed) conn.Open();
-
-                    var query = "SELECT [Division]" +
-                        "  , [Names] " +
-                        " FROM [dbo].[divtbl] ";
+                    //버바킹 스크립팅은 @를 붙여서 문자열로 만들어 주는 것이다.
+                    var query = @"SELECT [Idx]
+                                          ,[Names]
+                                          ,[Levels]
+                                          ,[Addr]
+                                          ,[Mobile]
+                                          ,[Email]
+                                          ,[userID]
+                                          ,[lastLoginDt]
+                                          ,[loginIpAddr]
+                                      FROM [dbo].[membertbl]";
                     SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                     DataSet ds = new DataSet();
-                    adapter.Fill(ds, "divtbl");
+                    adapter.Fill(ds, "membertbl");
 
                     DgvData.DataSource = ds;
-                    DgvData.DataMember = "divtbl";
+                    DgvData.DataMember = "membertbl";
                 }
             }
             catch (Exception ex)
@@ -170,21 +180,64 @@ namespace BookRentalShopApp
             {
                 using (SqlConnection conn = new SqlConnection(Helper.Common.ConnString))
                 {
-                    if (conn.State == ConnectionState.Closed) conn.Open();//연결이 닫혀 있다면 연결을 뚫어라
                     SqlCommand cmd = new SqlCommand();//cmd라는 것은 sql 명령의 집합체이다.
                     cmd.Connection = conn;//해당 명령 중 연결이라는 것을 conn에 할당한다.
-                    var query = "UPDATE [dbo].[divtbl]" +
-                        " SET [Names] = @Names " +
-                        " WHERE [Division] = @Division ";//쿼리 날린다.
+                    var query = "";
+                    if (conn.State == ConnectionState.Closed) conn.Open();//연결이 닫혀 있다면 연결을 뚫어라
+                    else //UPDATE
+                    {
+                        query = @"UPDATE INSERT INTO [dbo].[membertbl]
+                                   ([Names]
+                                   ,[Levels]
+                                   ,[Addr]
+                                   ,[Mobile]
+                                   ,[Email]
+                                   ,[userID]
+                                   ,[passwords]
+                                   ,[lastLoginDt]
+                                   ,[loginIpAddr])
+                             VALUES
+                                   (@Names
+                                   ,@Levels
+                                   ,@Addr
+                                   ,@Mobile
+                                   ,@Email
+                                   ,@userID
+                                   ,@passwords;"; 
+                    }
                     cmd.CommandText = query;
 
-                    SqlParameter pNames = new SqlParameter("@Names", SqlDbType.NVarChar, 45);
+                    var pNames = new SqlParameter("@Names", SqlDbType.NVarChar, 50);
                     pNames.Value = TxtNames.Text;
                     cmd.Parameters.Add(pNames);
 
-                    SqlParameter pDivision = new SqlParameter("@Division", SqlDbType.NVarChar, 8);
-                    pDivision.Value = TxtNames.Text;
-                    cmd.Parameters.Add(pDivision);
+                    var pLevels = new SqlParameter("@Levels", SqlDbType.Char, 1);
+                    pLevels.Value = CboLevels.SelectedItem.ToString();
+                    cmd.Parameters.Add(pLevels);
+
+                    var pAddr = new SqlParameter("@Addr", SqlDbType.NVarChar, 100);
+                    pAddr.Value = TxtAddr.Text;
+                    cmd.Parameters.Add(pAddr);
+
+                    var pMobile = new SqlParameter("@Mobile", SqlDbType.NVarChar, 13);
+                    pMobile.Value = TxtMobile.Text;
+                    cmd.Parameters.Add(pMobile);
+
+                    var pEmail = new SqlParameter("@Email", SqlDbType.VarChar, 50);
+                    pEmail.Value = TxtEmail.Text;
+                    cmd.Parameters.Add(pEmail);
+
+                    var pUserId = new SqlParameter("@userId", SqlDbType.VarChar, 20);
+                    pUserId.Value = TxtUserId.Text;
+                    cmd.Parameters.Add(pUserId);
+
+                    var pPasswords = new SqlParameter("@passwords", SqlDbType.VarChar, 100);
+                    pPasswords.Value = TxtPasswords.Text;
+                    cmd.Parameters.Add(pPasswords);
+
+                    var pIdx = new SqlParameter("@Idx", SqlDbType.Int);
+                    pIdx.Value = TxtIdx.Text;
+                    cmd.Parameters.Add(pIdx);
 
                     var result = cmd.ExecuteNonQuery();
                     if (result == 1)
@@ -208,3 +261,24 @@ namespace BookRentalShopApp
     }
 }
 //값을 구분할 수 있게 가장 많이 쓰는 값은 flag이다.
+//region과 endregion으로 캡슐화 해준다.
+
+/*
+ INSERT INTO [dbo].[membertbl]
+           ([Names]
+           ,[Levels]
+           ,[Addr]
+           ,[Mobile]
+           ,[Email]
+           ,[userID]
+           ,[passwords]
+           ,[lastLoginDt]
+           ,[loginIpAddr])
+     VALUES
+           (@Names
+           ,@Levels
+           ,@Addr
+           ,@Mobile
+           ,@Email
+           ,@userID
+           ,@passwords*/
