@@ -18,7 +18,10 @@ namespace BookRentalShopApp
         {
             InitializeComponent();
         }
-       
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+
+        }
         private void FrmMain_Shown(object sender, EventArgs e)
         {
             FrmLogin frm = new FrmLogin();
@@ -35,9 +38,10 @@ namespace BookRentalShopApp
             FrmDivCode frm = new FrmDivCode();
             frm.Dock = DockStyle.Fill;
             frm.MdiParent = this;//FrmMain
-            frm.Show();
-            frm.Width = this.ClientSize.Width - 10;//추가
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Width = this.ClientSize.Width - 1000;//추가
             frm.Height = this.Height - menuStrip1.Height;//추가
+            frm.Show();
             frm.WindowState = FormWindowState.Maximized;
         }
 
@@ -53,6 +57,18 @@ namespace BookRentalShopApp
             {
                 e.Cancel = true;//프로그램 종료 안함.
             }
+        }
+
+        private void MnuMember_Click(object sender, EventArgs e)
+        {
+            FrmMember frm = new FrmMember();
+            frm.Dock = DockStyle.Fill;
+            frm.MdiParent = this;//FrmMain
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Width = this.ClientSize.Width - 1000;//추가
+            frm.Height = this.Height - menuStrip1.Height;//추가
+            frm.Show();
+            frm.WindowState = FormWindowState.Maximized;
         }
     }
 }

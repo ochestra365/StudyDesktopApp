@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace BookRentalShopApp
 {
-    public partial class FrmDivCode : MetroForm
+    public partial class FrmMember : MetroForm
     {
-        public FrmDivCode()
+        public FrmMember()
         {
             InitializeComponent();
         }

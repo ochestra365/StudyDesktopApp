@@ -1,14 +1,8 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BookRentalShopApp
@@ -19,7 +13,10 @@ namespace BookRentalShopApp
         {
             InitializeComponent();
         }
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
 
+        }
         private void BtnLogin_Click(object sender, EventArgs e)
         {
             var strUserId = "";
@@ -42,16 +39,15 @@ namespace BookRentalShopApp
                         " WHERE userID = @userID " +
                         " AND passwords = @passwords " +
                         " AND levels = 'S' ";
-                    
+
                     //SqlCommand 생성
-                    SqlCommand cmd = new SqlCommand(query,conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     //SQLInjection 해킹 막기 위해서 사용하는 부분이다.
-                    SqlParameter pUserID = new SqlParameter("@userId", SqlDbType.VarChar,20);
+                    SqlParameter pUserID = new SqlParameter("@userId", SqlDbType.VarChar, 20);
                     pUserID.Value = TxtUserId.Text;
                     cmd.Parameters.Add(pUserID);
                     SqlParameter pPasswords = new SqlParameter("@passwords", SqlDbType.VarChar, 20);
                     pPasswords.Value = TxtPassword.Text;
-                    cmd.Parameters.Add(pUserID);
                     cmd.Parameters.Add(pPasswords);
                     //sql Injection을 방어하기 위한 것이다. 파라미터를 생성해서 사용한다.
                     //Secure Coding

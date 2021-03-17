@@ -67,31 +67,32 @@ namespace BookRentalShopApp
             // MnuDivCode
             // 
             this.MnuDivCode.Name = "MnuDivCode";
-            this.MnuDivCode.Size = new System.Drawing.Size(138, 22);
+            this.MnuDivCode.Size = new System.Drawing.Size(180, 22);
             this.MnuDivCode.Text = "구분코드(&C)";
             this.MnuDivCode.Click += new System.EventHandler(this.MnuDivCode_Click);
             // 
             // MnuMember
             // 
             this.MnuMember.Name = "MnuMember";
-            this.MnuMember.Size = new System.Drawing.Size(138, 22);
+            this.MnuMember.Size = new System.Drawing.Size(180, 22);
             this.MnuMember.Text = "회원(&P)";
+            this.MnuMember.Click += new System.EventHandler(this.MnuMember_Click);
             // 
             // MnuBooks
             // 
             this.MnuBooks.Name = "MnuBooks";
-            this.MnuBooks.Size = new System.Drawing.Size(138, 22);
+            this.MnuBooks.Size = new System.Drawing.Size(180, 22);
             this.MnuBooks.Text = "도서(&B)";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(135, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
             // MnuRental
             // 
             this.MnuRental.Name = "MnuRental";
-            this.MnuRental.Size = new System.Drawing.Size(138, 22);
+            this.MnuRental.Size = new System.Drawing.Size(180, 22);
             this.MnuRental.Text = "대여(&R)";
             // 
             // MnuExit
