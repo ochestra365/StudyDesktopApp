@@ -105,7 +105,6 @@ namespace BookRentalShopApp
 
                     SqlParameter pNames = new SqlParameter("@Names", SqlDbType.NVarChar, 45);
                     pNames.Value = TxtNames.Text;
-                    SqlParameter param;//param은 sql의 파라미터에 쓰이는 변수이다.
                     cmd.Parameters.Add(pNames);
 
                     SqlParameter pDivision = new SqlParameter("@Division", SqlDbType.NVarChar, 8);
