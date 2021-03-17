@@ -102,7 +102,7 @@ namespace BookRentalShopApp
             this.TxtPassword.CustomButton.Visible = false;
             this.TxtPassword.Lines = new string[0];
             this.TxtPassword.Location = new System.Drawing.Point(121, 116);
-            this.TxtPassword.MaxLength = 32767;
+            this.TxtPassword.MaxLength = 20;
             this.TxtPassword.Name = "TxtPassword";
             this.TxtPassword.PasswordChar = '●';
             this.TxtPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -115,7 +115,6 @@ namespace BookRentalShopApp
             this.TxtPassword.UseSelectable = true;
             this.TxtPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.TxtPassword.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-         
             // 
             // BtnLogin
             // 
@@ -136,7 +135,6 @@ namespace BookRentalShopApp
             this.BtnCancle.Text = "로그인 취소";
             this.BtnCancle.UseSelectable = true;
             this.BtnCancle.Click += new System.EventHandler(this.BtnCancle_Click);
-          
             // 
             // FrmLogin
             // 
@@ -157,7 +155,6 @@ namespace BookRentalShopApp
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "로그인";
-            this.Load += new System.EventHandler(this.FrmLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

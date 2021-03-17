@@ -209,3 +209,4 @@ namespace AddressInfoApp
         }
     }
 }
+//보안적인 취약점이 존재하기 때문에 SQL INJECTION이 생긴다. 즉, 코딩할 때, 쿼리문을 날리는 형식의 코딩을 짜면 안된다.
