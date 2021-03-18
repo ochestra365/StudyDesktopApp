@@ -134,7 +134,7 @@ namespace BookRentalShopApp
             this.BtnCancle.TabIndex = 5;
             this.BtnCancle.Text = "로그인 취소";
             this.BtnCancle.UseSelectable = true;
-            this.BtnCancle.Click += new System.EventHandler(this.BtnCancle_Click);
+        
             // 
             // FrmLogin
             // 

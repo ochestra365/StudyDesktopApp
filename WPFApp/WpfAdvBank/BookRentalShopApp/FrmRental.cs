@@ -8,12 +8,14 @@ using System.Windows.Forms;
 
 namespace BookRentalShopApp
 {
+    
     public partial class FrmRental : MetroForm
     {
+        public string SelName { get; set; }
+        public string SelIdx { get; set; }
         #region 전역변수
         private bool IsNew { get; set; }//수정, false 신규
         #endregion 전역변수 영역
-
         #region 이벤트 영역
         public FrmRental()
         {
@@ -26,8 +28,8 @@ namespace BookRentalShopApp
             InitCboData();//콤보박스 들어가는 데이터 초기화
             RefreshData();
 
-            DtpReleaseDate.CustomFormat = "yyyy-MM-dd";
-            DtpReleaseDate.Format = DateTimePickerFormat.Custom;
+            DtpRentalDate.CustomFormat = "yyyy-MM-dd";
+            DtpRentalDate.Format = DateTimePickerFormat.Custom;
         }
         private void FrmDivCode_Resize(object sender, EventArgs e)
         {
@@ -71,37 +73,29 @@ namespace BookRentalShopApp
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Helper.Common.ConnString))//한쿼리창에서의 연산
-                {
-                    if (conn.State == ConnectionState.Closed) conn.Open();//연결상태가 닫혀있으면 열어라
-                    var query = @"SELECT Division, Names FROM dbo.divtbl ";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    var temp = new Dictionary<string, string>();
-                    while (reader.Read())
-                    {
-                        temp.Add(reader[0].ToString(), reader[1].ToString());//B001, 공포/스릴러//object형식을 string 문자타입으로 바꿔준다.
-                    }
-                    CboDivision.DataSource = new BindingSource(temp, null);
-                    CboDivision.DisplayMember = "Value";
-                    CboDivision.ValueMember = "Key";
-                    CboDivision.SelectedIndex = -1;
-                }
+                var temp = new Dictionary<string, string>();
+                temp.Add("R", "대여중");
+                temp.Add("T", "반납");
+                
+                CboRentalState.DataSource = new BindingSource(temp, null);
+                CboRentalState.DisplayMember = "Value";
+                CboRentalState.ValueMember = "Key";
+                CboRentalState.SelectedIndex = -1;
+                
             }
             catch { }
         }
         private void AsignToControls(DataGridViewRow selData)
         {
             TxtIdx.Text = selData.Cells[0].Value.ToString();
-            TxtAuthor.Text = selData.Cells[1].Value.ToString();
-            CboDivision.SelectedValue = selData.Cells[2].Value;//B001 = 값이 매칭된다.
+           // TxtAuthor.Text = selData.Cells[1].Value.ToString();
+           // CboDivision.SelectedValue = selData.Cells[2].Value;//B001 = 값이 매칭된다.
             // sleData.Cell[3] X
-            Cbobook.Text = selData.Cells[4].Value.ToString();
-            // RealeseDate
-            DtpReleaseDate.Value = (DateTime)selData.Cells[5].Value;
-            TxtISBN.Text = selData.Cells[5].Value.ToString();
-            TxtPrice.Text = selData.Cells[6].Value.ToString();
-            TxtDescriptions.Text = selData.Cells[7].Value.ToString();
+            DtpRentalDate.Text = selData.Cells[4].Value.ToString();
+            DtpRentalDate.Value = (DateTime)selData.Cells[5].Value;
+           // TxtISBN.Text = selData.Cells[5].Value.ToString();
+           // TxtPrice.Text = selData.Cells[6].Value.ToString();
+           // TxtDescriptions.Text = selData.Cells[7].Value.ToString();
             TxtIdx.ReadOnly = true;
         }
 
@@ -243,31 +237,31 @@ namespace BookRentalShopApp
                     cmd.CommandText = query;
 
                     var pAuthor = new SqlParameter("@Author", SqlDbType.NVarChar, 50);
-                    pAuthor.Value = TxtAuthor.Text;
+                    //pAuthor.Value = TxtAuthor.Text;
                     cmd.Parameters.Add(pAuthor);
 
                     var pDivision = new SqlParameter("@Division", SqlDbType.VarChar, 8);
-                    pDivision.Value = CboDivision.SelectedValue; // B001
+                   // pDivision.Value = CboDivision.SelectedValue; // B001
                     cmd.Parameters.Add(pDivision);
 
                     var pNames = new SqlParameter("@Names", SqlDbType.NVarChar, 100);
-                    pNames.Value = TxtAuthor.Text;
+                    //pNames.Value = TxtAuthor.Text;
                     cmd.Parameters.Add(pNames);
 
                     var pReleaseDate = new SqlParameter("@ReleaseDate", SqlDbType.Date);
-                    pReleaseDate.Value = DtpReleaseDate.Value;
+                    pReleaseDate.Value = DtpRentalDate.Value;
                     cmd.Parameters.Add(pReleaseDate);
 
                     var pISBN = new SqlParameter("@ISBN", SqlDbType.VarChar, 200);
-                    pISBN.Value = TxtISBN.Text;
+                    //pISBN.Value = TxtISBN.Text;
                     cmd.Parameters.Add(pISBN);
 
                     var pPrice = new SqlParameter("@Price", SqlDbType.Decimal);
-                    pPrice.Value = TxtPrice.Text;
+                    //pPrice.Value = TxtPrice.Text;
                     cmd.Parameters.Add(pPrice);
 
                     var pDescriptions = new SqlParameter("@Descriptions", SqlDbType.NVarChar);
-                    pDescriptions.Value = TxtDescriptions.Text;
+                    //pDescriptions.Value = TxtDescriptions.Text;
                     cmd.Parameters.Add(pDescriptions);
 
                     if (IsNew == false) // Update 일때만 처리
@@ -302,11 +296,11 @@ namespace BookRentalShopApp
         private bool CheckValidation()
         {
             if (
-                string.IsNullOrEmpty(TxtAuthor.Text) ||
-                string.IsNullOrEmpty(Cbobook.Text) ||
+                //string.IsNullOrEmpty(TxtAuthor.Text) ||
+                string.IsNullOrEmpty(DtpRentalDate.Text) ||
                   //string.IsNullOrEmpty(TxtMobile.Text) ||
-                  CboDivision.SelectedIndex == -1 ||
-               DtpReleaseDate.Value == null)
+                  //CboDivision.SelectedIndex == -1 ||
+               DtpRentalDate.Value == null)
             {
                 MetroMessageBox.Show(this, "빈값삭제불가", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -316,15 +310,44 @@ namespace BookRentalShopApp
 
         private void ClearInput()
         {
-            TxtIdx.Text = TxtAuthor.Text = "";
-            TxtAuthor.Text = TxtISBN.Text = "";
-            TxtPrice.Text = TxtDescriptions.Text = "";
-            CboDivision.SelectedIndex = -1; // ?
-            DtpReleaseDate.Value = DateTime.Now; // 오늘 날짜로 초기화
+            selMemberIdx = 0;
+            selMemberName = "";
+            TxtIdx.Text = "";
+           // TxtIdx.Text = TxtAuthor.Text = "";
+           // TxtAuthor.Text = TxtISBN.Text = "";
+            //TxtPrice.Text = TxtDescriptions.Text = "";
+            //CboDivision.SelectedIndex = -1; // ?
+            DtpRentalDate.Value = DateTime.Now; // 오늘 날짜로 초기화
             TxtIdx.ReadOnly = true;
             IsNew = true;
         }
         #endregion
+        //초기화를 항상 잘 해주어야 하는 값에 속한다.
+        private int selMemberIdx = 0;// 선택된 회원번호
+        private string selMemberName = "";//선택된 회원이름
+
+        private void BtnSearchMember_Click(object sender, EventArgs e)
+        {
+            FrmMemberPopup frm = new FrmMemberPopup();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            if(frm.ShowDialog()==DialogResult.OK)
+            {
+                selMemberIdx = frm.SelIdx;
+                TxtMemberName.Text = selMemberName = frm.SellName;
+            }
+        }
+        private int selBookIdx = 0;
+        private string selBookName = "";
+        private void BtnSearchBook_Click(object sender, EventArgs e)
+        {
+            FrmMemberPopup frm = new FrmMemberPopup();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            if(frm.ShowDialog()==DialogResult.OK)
+            {
+                selBookIdx = frm.SelIdx;
+                TxtBookName.Text = selBookName = frm.SellName;
+            }
+        }
     }
 }
 /*FrmBooks에서 오류가 가장 많이 누적됨. 나머지는 디버깅(그래봐야.. 소스코드 복붙) 해보았다.
