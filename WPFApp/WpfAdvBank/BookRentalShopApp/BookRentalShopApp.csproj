@@ -58,6 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmRental.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRental.Designer.cs">
+      <DependentUpon>FrmRental.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmBooks.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     <Compile Include="Helper\Common.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmRental.resx">
+      <DependentUpon>FrmRental.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmBooks.resx">
       <DependentUpon>FrmBooks.cs</DependentUpon>
     </EmbeddedResource>

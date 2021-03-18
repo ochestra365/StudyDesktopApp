@@ -12,9 +12,6 @@ namespace BookRentalShopApp
         #region 전역변수
         private bool IsNew { get; set; }//수정, false 신규
         #endregion 전역변수 영역
-        
-       
-
 
         #region 이벤트 영역
         public FrmMember()

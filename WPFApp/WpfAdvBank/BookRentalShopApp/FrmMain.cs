@@ -74,6 +74,12 @@ namespace BookRentalShopApp
             frm.Show();
             frm.WindowState = FormWindowState.Maximized;
         }
+
+        private void MnuRental_Click(object sender, EventArgs e)
+        {
+            FrmRental frm = new FrmRental();
+            InitChildForm(frm, "대여관리");
+        }
     }
 }
 //실제 비즈니스 로직보다 사용자 편의성을 위한 코딩이 더 많을 수 있다.
