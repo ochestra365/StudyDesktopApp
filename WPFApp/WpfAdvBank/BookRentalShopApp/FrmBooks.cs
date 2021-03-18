@@ -227,8 +227,23 @@ namespace BookRentalShopApp
             column = DgvData.Columns[8];// Descriptions
             column.Visible = false;
         }
-
-        private void SaveData()
+        /*INSERT INTO [dbo].[bookstbl]
+                   ([Author]
+                   ,[Division]
+                   ,[Names]
+                   ,[ReleaseDate]
+                   ,[ISBN]
+                   ,[Price]
+                   ,[Descriptions])
+             VALUES
+                   (@Author
+                   ,@Division
+                   ,@Names
+                   ,@ReleaseDate
+                   ,@ISBN
+                   ,@Price
+                   ,@Descriptions*/
+        private void SaveData()//초기 잘못된 자료를 복사하니 사용자 오류가 발생하는 것이다.
         {
             try
             {

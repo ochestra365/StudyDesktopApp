@@ -9,15 +9,27 @@ namespace BookRentalShopApp
 {
     public partial class FrmDivCode : MetroForm
     {
+        #region 전역변수
+        private bool IsNew { get; set; }//수정, false 신규
+        #endregion 전역변수 영역
+
+
+
+        #region 이벤트 영역
         public FrmDivCode()
         {
             InitializeComponent();
         }
-
-        #region 전역변수
-        private bool IsNew { get; set; }//수정, false 신규
-        #endregion 전역변수 영역
-        #region 이벤트 영역
+        private void FrmDivCode_Load(object sender, EventArgs e)
+        {
+            IsNew = true;//신규로 
+            RefreshData();
+        }
+        private void FrmDivCode_Resize(object sender, EventArgs e)
+        {
+            DgvData.Height = this.ClientRectangle.Height - 90;
+            GrbDetail.Height = this.ClientRectangle.Height - 90;
+        }
         private void DgvData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex > -1)//선택된 값이 존재하면
@@ -29,6 +41,16 @@ namespace BookRentalShopApp
 
                 IsNew = false;//수정
             }
+        }
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (CheckValidation() == false) return;
+
+            if (MessageBox.Show(this, "삭제?", "삭제", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+
+            DeleteData();
+            RefreshData();
+            ClearInput();
         }
         private void BtnNew_Click(object sender, EventArgs e)
         {
@@ -43,92 +65,41 @@ namespace BookRentalShopApp
             RefreshData();
             ClearInput();
         }
-        
-
-        private void FrmDivCode_Load(object sender, EventArgs e)
-        {
-            IsNew = true;//신규로 
-            RefreshData();
-        }
-
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            if (CheckValidation() == false) return;
-
-            if (MessageBox.Show(this, "삭제?", "삭제", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-
-            DeleteData();
-            RefreshData();
-            ClearInput();
-        }
-
-        private void FrmDivCode_Resize(object sender, EventArgs e)
-        {
-            DgvData.Height = this.ClientRectangle.Height - 90;
-            GrbDetail.Height = this.ClientRectangle.Height - 90;
-        }
         #endregion
         #region 사용자 영역
         /// <summary>
         /// 삭제처리 프로세스
         /// </summary>
-        private void ClearInput()
-        {
-            TxtDivision.Text = TxtNames.Text = "";
-            TxtDivision.ReadOnly = false;
-            IsNew = true;
-        }
-
-        private bool CheckValidation()
-        {
-            if (string.IsNullOrEmpty(TxtDivision.Text) || string.IsNullOrEmpty(TxtNames.Text))
-            {
-                MetroMessageBox.Show(this, "빈값삭제불가", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            return true;
-        }
-
         private void DeleteData()
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(Helper.Common.ConnString))
                 {
-                    if (conn.State == ConnectionState.Closed) conn.Open();//연결이 닫혀 있다면 연결을 뚫어라
-                    SqlCommand cmd = new SqlCommand();//cmd라는 것은 sql 명령의 집합체이다.
-                    cmd.Connection = conn;//해당 명령 중 연결이라는 것을 conn에 할당한다.
+                    if (conn.State == ConnectionState.Closed) conn.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = conn;
 
                     var query = "";
 
-                    if (IsNew == true)
-                    {
-                        query = " INSERT INTO [dbo].[divtbl] " +
-                            " VALUES " +
-                            " (@Division, @Names) ";
-                    }
-                    else
-                    {
-                        query = "UPDATE [dbo].[divtbl]" +
-                  " SET [Names] = @Names " +
-                  " WHERE [Division] = @Division ";//쿼리 날린다.
-                    }
+                    query = "DELETE FROM [dbo].[divtbl] " +
+                            " WHERE [Division] = @Division ";
                     cmd.CommandText = query;
 
-                    SqlParameter pDivision = new SqlParameter("@Division", SqlDbType.NVarChar, 8);
-                    pDivision.Value = TxtNames.Text;
+                    SqlParameter pDivision = new SqlParameter("@Division", SqlDbType.VarChar, 8);
+                    pDivision.Value = TxtDivision.Text;
                     cmd.Parameters.Add(pDivision);
 
                     var result = cmd.ExecuteNonQuery();
                     if (result == 1)
                     {
-                        MetroMessageBox.Show(this, "삭제 성공", "삭제", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                        MetroMessageBox.Show(this, "삭제 성공", "삭제",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MetroMessageBox.Show(this, "삭제 실패", "삭제", MessageBoxButtons.OK,
-                             MessageBoxIcon.Warning);
+                        MetroMessageBox.Show(this, "삭제 실패", "삭제",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -137,7 +108,6 @@ namespace BookRentalShopApp
                 MetroMessageBox.Show(this, $"예외발생 : {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void RefreshData()//화면 조회시 사용하는 것.
         {
             try
@@ -163,47 +133,80 @@ namespace BookRentalShopApp
                 //사용자 편의를 위해 가장 많이 쓸 항목이다.
             }
         }
-
+        private void ClearInput()
+        {
+            TxtDivision.Text = TxtNames.Text = "";
+            TxtDivision.ReadOnly = false;
+            IsNew = true;
+        }
+        /// <summary>
+        /// 입력(수정) 프로세스
+        /// </summary>
+        /// <returns></returns>
         private void SaveData()
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(Helper.Common.ConnString))
                 {
-                    if (conn.State == ConnectionState.Closed) conn.Open();//연결이 닫혀 있다면 연결을 뚫어라
-                    SqlCommand cmd = new SqlCommand();//cmd라는 것은 sql 명령의 집합체이다.
-                    cmd.Connection = conn;//해당 명령 중 연결이라는 것을 conn에 할당한다.
-                    var query = "UPDATE [dbo].[divtbl]" +
-                        " SET [Names] = @Names " +
-                        " WHERE [Division] = @Division ";//쿼리 날린다.
+                    if (conn.State == ConnectionState.Closed) conn.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = conn;
+
+                    var query = "";
+
+                    if (IsNew == true) // ISNERT
+                    {
+                        query = "INSERT INTO dbo.divtbl " +
+                            " VALUES " +
+                            " (@Division, @Names) ";
+                    }
+                    else // UPDATE
+                    {
+                        query = "UPDATE [dbo].[divtbl] " +
+                            "   SET [Names] = @Names " +
+                            " WHERE [Division] = @Division ";
+                    }
                     cmd.CommandText = query;
 
                     SqlParameter pNames = new SqlParameter("@Names", SqlDbType.NVarChar, 45);
                     pNames.Value = TxtNames.Text;
                     cmd.Parameters.Add(pNames);
 
-                    SqlParameter pDivision = new SqlParameter("@Division", SqlDbType.NVarChar, 8);
-                    pDivision.Value = TxtNames.Text;
+                    SqlParameter pDivision = new SqlParameter("@Division", SqlDbType.VarChar, 8);
+                    pDivision.Value = TxtDivision.Text;
                     cmd.Parameters.Add(pDivision);
 
                     var result = cmd.ExecuteNonQuery();
                     if (result == 1)
                     {
-                        MetroMessageBox.Show(this, "저장 성공", "저장", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                        MetroMessageBox.Show(this, "저장 성공", "저장",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MetroMessageBox.Show(this, "저장 실패", "저장", MessageBoxButtons.OK,
-                             MessageBoxIcon.Warning);
+                        MetroMessageBox.Show(this, "저장 실패", "저장",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MetroMessageBox.Show(this, $"예외발생 : {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, $"예외발생 : {ex.Message}", "오류", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
+
+        private bool CheckValidation()
+        {
+            if (string.IsNullOrEmpty(TxtDivision.Text) || string.IsNullOrEmpty(TxtNames.Text))
+            {
+                MetroMessageBox.Show(this, "빈값삭제불가", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+        
         #endregion
     }
 }
