@@ -57,12 +57,12 @@ namespace BookRentalShopApp
 
             DeleteData();
             RefreshData();
-            ClearInput();
+            ClearInputs();
         }
 
         private void BtnNew_Click(object sender, EventArgs e)
         {
-            ClearInput();
+            ClearInputs();
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace BookRentalShopApp
             //Validation 체크(유효성 체크)개발자가 알아야 할 역할 중 하나이다.
             SaveData();
             RefreshData();
-            ClearInput();
+            ClearInputs();
         }
 
         #endregion
@@ -225,9 +225,9 @@ namespace BookRentalShopApp
 
                     if (IsNew == false) // Update 일때만 처리
                     {
-                        var pIdx = new SqlParameter("@Idx", SqlDbType.Int);
-                        pIdx.Value = TxtIdx.Text;
-                        cmd.Parameters.Add(pIdx);
+                        var pIdxs = new SqlParameter("@Idx", SqlDbType.Int);//위쪽에서 사용되서 cs0136에러가 발생하게 된다.
+                        pIdxs.Value = TxtIdx.Text;
+                        cmd.Parameters.Add(pIdxs);
                     }
 
                     var result = cmd.ExecuteNonQuery();
@@ -248,59 +248,35 @@ namespace BookRentalShopApp
                 MetroMessageBox.Show(this, $"예외발생 : {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void ClearInput()//여기서 오류발생함!! 
-        {
-            TxtIdx.Text = TxtNames.Text = "";
-            TxtMobile.Text = TxtAddr.Text = TxtEmail.Text = "";
-            TxtUserId.Text = "";
-            TxtPasswords.Text = "";
-            CboLevels.SelectedIndex = -1;
-            TxtIdx.ReadOnly = true;
-            IsNew = true;
-        }
-
         private bool CheckValidation()
         {
-            if (string.IsNullOrEmpty(TxtIdx.Text) || string.IsNullOrEmpty(TxtNames.Text) ||
+            if (string.IsNullOrEmpty(TxtNames.Text) ||
                 string.IsNullOrEmpty(TxtAddr.Text) || string.IsNullOrEmpty(TxtMobile.Text) ||
                 string.IsNullOrEmpty(TxtEmail.Text) || CboLevels.SelectedIndex == -1 ||
                 string.IsNullOrEmpty(TxtUserId.Text))
             {
-                MetroMessageBox.Show(this, "빈값삭제불가", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MetroMessageBox.Show(this, "빈값은 처리할 수 없습니다.", "경고",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+
             return true;
         }
 
-       
-
-      
-
-      
+        private void ClearInputs()
+        {
+            TxtIdx.Text = TxtNames.Text = "";
+            TxtMobile.Text = TxtAddr.Text = TxtEmail.Text = "";
+            TxtUserId.Text = TxtPasswords.Text = "";
+            CboLevels.SelectedIndex = -1; // ?
+            TxtIdx.ReadOnly = true;
+            IsNew = true;
+        }
         #endregion
-
-
     }
 }
 //값을 구분할 수 있게 가장 많이 쓰는 값은 flag이다.
 //region과 endregion으로 캡슐화 해준다.
-
 /*
- INSERT INTO [dbo].[membertbl]
-           ([Names]
-           ,[Levels]
-           ,[Addr]
-           ,[Mobile]
-           ,[Email]
-           ,[userID]
-           ,[passwords]
-           ,[lastLoginDt]
-           ,[loginIpAddr])
-     VALUES
-           (@Names
-           ,@Levels
-           ,@Addr
-           ,@Mobile
-           ,@Email
-           ,@userID
-           ,@passwords*/
+ 상당히 많은 오류가 발생하고 있따.
+ */
