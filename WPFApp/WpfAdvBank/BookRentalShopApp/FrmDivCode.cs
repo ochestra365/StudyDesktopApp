@@ -133,12 +133,7 @@ namespace BookRentalShopApp
                 //사용자 편의를 위해 가장 많이 쓸 항목이다.
             }
         }
-        private void ClearInput()
-        {
-            TxtDivision.Text = TxtNames.Text = "";
-            TxtDivision.ReadOnly = false;
-            IsNew = true;
-        }
+      
         /// <summary>
         /// 입력(수정) 프로세스
         /// </summary>
@@ -196,7 +191,10 @@ namespace BookRentalShopApp
                     MessageBoxIcon.Error);
             }
         }
-
+        /// <summary>
+        /// 입력값 유효성 메서드
+        /// </summary>
+        /// <returns></returns>
         private bool CheckValidation()
         {
             if (string.IsNullOrEmpty(TxtDivision.Text) || string.IsNullOrEmpty(TxtNames.Text))
@@ -206,7 +204,12 @@ namespace BookRentalShopApp
             }
             return true;
         }
-        
+        private void ClearInput()
+        {
+            TxtDivision.Text = TxtNames.Text = "";
+            TxtDivision.ReadOnly = false;
+            IsNew = true;
+        }
         #endregion
     }
 }

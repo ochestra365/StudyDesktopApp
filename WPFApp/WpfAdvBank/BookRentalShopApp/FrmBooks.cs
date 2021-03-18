@@ -153,18 +153,14 @@ namespace BookRentalShopApp
                     if (conn.State == ConnectionState.Closed) conn.Open();//연결이 닫혀 있다면 연결을 뚫어라
                     SqlCommand cmd = new SqlCommand();//cmd라는 것은 sql 명령의 집합체이다.
                     cmd.Connection = conn;//해당 명령 중 연결이라는 것을 conn에 할당한다.
-
-                    var query = "";
-
-                    if (IsNew == true)
-                    {
-                        query = " DELETE INTO [dbo].[membertbl] " +
+                  
+                    var query = " DELETE INTO [dbo].[membertbl] " +
                                 " WHERE [Idx]=@Idx ";
-                        cmd.CommandText = query;
-                    }
+                    cmd.CommandText = query;
+                    
 
-                    SqlParameter pIdx = new SqlParameter("@Idx", SqlDbType.Int);
-                    pIdx.Value = TxtAuthor.Text;
+                    var pIdx = new SqlParameter("@Idx", SqlDbType.Int);
+                    pIdx.Value = TxtIdx.Text;
                     cmd.Parameters.Add(pIdx);
 
                     var result = cmd.ExecuteNonQuery();
