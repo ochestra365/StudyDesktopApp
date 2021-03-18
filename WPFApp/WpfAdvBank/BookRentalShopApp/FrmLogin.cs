@@ -46,12 +46,13 @@ namespace BookRentalShopApp
                     SqlParameter pUserID = new SqlParameter("@userId", SqlDbType.VarChar, 20);
                     pUserID.Value = TxtUserId.Text;
                     cmd.Parameters.Add(pUserID);
+
                     SqlParameter pPasswords = new SqlParameter("@passwords", SqlDbType.VarChar, 20);
                     pPasswords.Value = TxtPassword.Text;
                     cmd.Parameters.Add(pPasswords);
                     //sql Injection을 방어하기 위한 것이다. 파라미터를 생성해서 사용한다.
                     //Secure Coding
-                    //SqlDataReader 실행(1)
+            
                     SqlDataReader reader = cmd.ExecuteReader();
                     //reader로 처리..
                     reader.Read();

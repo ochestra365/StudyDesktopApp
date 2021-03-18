@@ -30,6 +30,7 @@ namespace BookRentalShopApp
         private void InitializeComponent()
         {
             this.GrbDetail = new System.Windows.Forms.GroupBox();
+            this.CboLevels = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
@@ -39,17 +40,16 @@ namespace BookRentalShopApp
             this.BtnSave = new MetroFramework.Controls.MetroButton();
             this.BtnNew = new MetroFramework.Controls.MetroButton();
             this.BtnDelete = new MetroFramework.Controls.MetroButton();
+            this.TxtPasswords = new MetroFramework.Controls.MetroTextBox();
+            this.TxtUserId = new MetroFramework.Controls.MetroTextBox();
+            this.TxtEmail = new MetroFramework.Controls.MetroTextBox();
+            this.TxtMobile = new MetroFramework.Controls.MetroTextBox();
+            this.TxtAddr = new MetroFramework.Controls.MetroTextBox();
             this.TxtNames = new MetroFramework.Controls.MetroTextBox();
             this.TxtIdx = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.DgvData = new System.Windows.Forms.DataGridView();
-            this.CboLevels = new MetroFramework.Controls.MetroComboBox();
-            this.TxtAddr = new MetroFramework.Controls.MetroTextBox();
-            this.TxtMobile = new MetroFramework.Controls.MetroTextBox();
-            this.TxtEmail = new MetroFramework.Controls.MetroTextBox();
-            this.TxtUserId = new MetroFramework.Controls.MetroTextBox();
-            this.TxtPasswords = new MetroFramework.Controls.MetroTextBox();
             this.GrbDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.SuspendLayout();
@@ -81,6 +81,23 @@ namespace BookRentalShopApp
             this.GrbDetail.TabIndex = 0;
             this.GrbDetail.TabStop = false;
             this.GrbDetail.Text = "상세";
+            // 
+            // CboLevels
+            // 
+            this.CboLevels.FormattingEnabled = true;
+            this.CboLevels.ItemHeight = 23;
+            this.CboLevels.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D",
+            "S"});
+            this.CboLevels.Location = new System.Drawing.Point(153, 107);
+            this.CboLevels.Name = "CboLevels";
+            this.CboLevels.PromptText = "레벨";
+            this.CboLevels.Size = new System.Drawing.Size(80, 29);
+            this.CboLevels.TabIndex = 3;
+            this.CboLevels.UseSelectable = true;
             // 
             // metroLabel8
             // 
@@ -168,6 +185,166 @@ namespace BookRentalShopApp
             this.BtnDelete.Text = "삭제";
             this.BtnDelete.UseSelectable = true;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
+            // TxtPasswords
+            // 
+            // 
+            // 
+            // 
+            this.TxtPasswords.CustomButton.Image = null;
+            this.TxtPasswords.CustomButton.Location = new System.Drawing.Point(154, 1);
+            this.TxtPasswords.CustomButton.Name = "";
+            this.TxtPasswords.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.TxtPasswords.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.TxtPasswords.CustomButton.TabIndex = 1;
+            this.TxtPasswords.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.TxtPasswords.CustomButton.UseSelectable = true;
+            this.TxtPasswords.CustomButton.Visible = false;
+            this.TxtPasswords.Lines = new string[0];
+            this.TxtPasswords.Location = new System.Drawing.Point(153, 279);
+            this.TxtPasswords.MaxLength = 32767;
+            this.TxtPasswords.Name = "TxtPasswords";
+            this.TxtPasswords.PasswordChar = '●';
+            this.TxtPasswords.PromptText = "패스워드";
+            this.TxtPasswords.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.TxtPasswords.SelectedText = "";
+            this.TxtPasswords.SelectionLength = 0;
+            this.TxtPasswords.SelectionStart = 0;
+            this.TxtPasswords.ShortcutsEnabled = true;
+            this.TxtPasswords.Size = new System.Drawing.Size(176, 23);
+            this.TxtPasswords.TabIndex = 9;
+            this.TxtPasswords.UseSelectable = true;
+            this.TxtPasswords.WaterMark = "패스워드";
+            this.TxtPasswords.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.TxtPasswords.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // TxtUserId
+            // 
+            // 
+            // 
+            // 
+            this.TxtUserId.CustomButton.Image = null;
+            this.TxtUserId.CustomButton.Location = new System.Drawing.Point(154, 1);
+            this.TxtUserId.CustomButton.Name = "";
+            this.TxtUserId.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.TxtUserId.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.TxtUserId.CustomButton.TabIndex = 1;
+            this.TxtUserId.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.TxtUserId.CustomButton.UseSelectable = true;
+            this.TxtUserId.CustomButton.Visible = false;
+            this.TxtUserId.Lines = new string[0];
+            this.TxtUserId.Location = new System.Drawing.Point(152, 245);
+            this.TxtUserId.MaxLength = 32767;
+            this.TxtUserId.Name = "TxtUserId";
+            this.TxtUserId.PasswordChar = '\0';
+            this.TxtUserId.PromptText = "아이디";
+            this.TxtUserId.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.TxtUserId.SelectedText = "";
+            this.TxtUserId.SelectionLength = 0;
+            this.TxtUserId.SelectionStart = 0;
+            this.TxtUserId.ShortcutsEnabled = true;
+            this.TxtUserId.Size = new System.Drawing.Size(176, 23);
+            this.TxtUserId.TabIndex = 8;
+            this.TxtUserId.UseSelectable = true;
+            this.TxtUserId.WaterMark = "아이디";
+            this.TxtUserId.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.TxtUserId.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // TxtEmail
+            // 
+            // 
+            // 
+            // 
+            this.TxtEmail.CustomButton.Image = null;
+            this.TxtEmail.CustomButton.Location = new System.Drawing.Point(154, 1);
+            this.TxtEmail.CustomButton.Name = "";
+            this.TxtEmail.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.TxtEmail.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.TxtEmail.CustomButton.TabIndex = 1;
+            this.TxtEmail.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.TxtEmail.CustomButton.UseSelectable = true;
+            this.TxtEmail.CustomButton.Visible = false;
+            this.TxtEmail.Lines = new string[0];
+            this.TxtEmail.Location = new System.Drawing.Point(153, 211);
+            this.TxtEmail.MaxLength = 32767;
+            this.TxtEmail.Name = "TxtEmail";
+            this.TxtEmail.PasswordChar = '\0';
+            this.TxtEmail.PromptText = "이메일";
+            this.TxtEmail.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.TxtEmail.SelectedText = "";
+            this.TxtEmail.SelectionLength = 0;
+            this.TxtEmail.SelectionStart = 0;
+            this.TxtEmail.ShortcutsEnabled = true;
+            this.TxtEmail.Size = new System.Drawing.Size(176, 23);
+            this.TxtEmail.TabIndex = 7;
+            this.TxtEmail.UseSelectable = true;
+            this.TxtEmail.WaterMark = "이메일";
+            this.TxtEmail.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.TxtEmail.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // TxtMobile
+            // 
+            // 
+            // 
+            // 
+            this.TxtMobile.CustomButton.Image = null;
+            this.TxtMobile.CustomButton.Location = new System.Drawing.Point(154, 1);
+            this.TxtMobile.CustomButton.Name = "";
+            this.TxtMobile.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.TxtMobile.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.TxtMobile.CustomButton.TabIndex = 1;
+            this.TxtMobile.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.TxtMobile.CustomButton.UseSelectable = true;
+            this.TxtMobile.CustomButton.Visible = false;
+            this.TxtMobile.Lines = new string[0];
+            this.TxtMobile.Location = new System.Drawing.Point(152, 177);
+            this.TxtMobile.MaxLength = 32767;
+            this.TxtMobile.Name = "TxtMobile";
+            this.TxtMobile.PasswordChar = '\0';
+            this.TxtMobile.PromptText = "전화번호 머에여?";
+            this.TxtMobile.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.TxtMobile.SelectedText = "";
+            this.TxtMobile.SelectionLength = 0;
+            this.TxtMobile.SelectionStart = 0;
+            this.TxtMobile.ShortcutsEnabled = true;
+            this.TxtMobile.Size = new System.Drawing.Size(176, 23);
+            this.TxtMobile.TabIndex = 6;
+            this.TxtMobile.UseSelectable = true;
+            this.TxtMobile.WaterMark = "전화번호 머에여?";
+            this.TxtMobile.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.TxtMobile.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // TxtAddr
+            // 
+            // 
+            // 
+            // 
+            this.TxtAddr.CustomButton.Image = null;
+            this.TxtAddr.CustomButton.Location = new System.Drawing.Point(154, 1);
+            this.TxtAddr.CustomButton.Name = "";
+            this.TxtAddr.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.TxtAddr.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.TxtAddr.CustomButton.TabIndex = 1;
+            this.TxtAddr.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.TxtAddr.CustomButton.UseSelectable = true;
+            this.TxtAddr.CustomButton.Visible = false;
+            this.TxtAddr.Lines = new string[0];
+            this.TxtAddr.Location = new System.Drawing.Point(152, 143);
+            this.TxtAddr.MaxLength = 32767;
+            this.TxtAddr.Name = "TxtAddr";
+            this.TxtAddr.PasswordChar = '\0';
+            this.TxtAddr.PromptText = "주소임";
+            this.TxtAddr.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.TxtAddr.SelectedText = "";
+            this.TxtAddr.SelectionLength = 0;
+            this.TxtAddr.SelectionStart = 0;
+            this.TxtAddr.ShortcutsEnabled = true;
+            this.TxtAddr.Size = new System.Drawing.Size(176, 23);
+            this.TxtAddr.TabIndex = 5;
+            this.TxtAddr.UseSelectable = true;
+            this.TxtAddr.WaterMark = "주소임";
+            this.TxtAddr.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.TxtAddr.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // TxtNames
             // 
@@ -264,183 +441,6 @@ namespace BookRentalShopApp
             this.DgvData.TabIndex = 1;
             this.DgvData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvData_CellClick_1);
             // 
-            // CboLevels
-            // 
-            this.CboLevels.FormattingEnabled = true;
-            this.CboLevels.ItemHeight = 23;
-            this.CboLevels.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D",
-            "S"});
-            this.CboLevels.Location = new System.Drawing.Point(153, 107);
-            this.CboLevels.Name = "CboLevels";
-            this.CboLevels.PromptText = "레벨";
-            this.CboLevels.Size = new System.Drawing.Size(80, 29);
-            this.CboLevels.TabIndex = 3;
-            this.CboLevels.UseSelectable = true;
-            // 
-            // TxtAddr
-            // 
-            // 
-            // 
-            // 
-            this.TxtAddr.CustomButton.Image = null;
-            this.TxtAddr.CustomButton.Location = new System.Drawing.Point(154, 1);
-            this.TxtAddr.CustomButton.Name = "";
-            this.TxtAddr.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.TxtAddr.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.TxtAddr.CustomButton.TabIndex = 1;
-            this.TxtAddr.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.TxtAddr.CustomButton.UseSelectable = true;
-            this.TxtAddr.CustomButton.Visible = false;
-            this.TxtAddr.Lines = new string[0];
-            this.TxtAddr.Location = new System.Drawing.Point(152, 143);
-            this.TxtAddr.MaxLength = 32767;
-            this.TxtAddr.Name = "TxtAddr";
-            this.TxtAddr.PasswordChar = '\0';
-            this.TxtAddr.PromptText = "주소임";
-            this.TxtAddr.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.TxtAddr.SelectedText = "";
-            this.TxtAddr.SelectionLength = 0;
-            this.TxtAddr.SelectionStart = 0;
-            this.TxtAddr.ShortcutsEnabled = true;
-            this.TxtAddr.Size = new System.Drawing.Size(176, 23);
-            this.TxtAddr.TabIndex = 5;
-            this.TxtAddr.UseSelectable = true;
-            this.TxtAddr.WaterMark = "주소임";
-            this.TxtAddr.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.TxtAddr.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // TxtMobile
-            // 
-            // 
-            // 
-            // 
-            this.TxtMobile.CustomButton.Image = null;
-            this.TxtMobile.CustomButton.Location = new System.Drawing.Point(154, 1);
-            this.TxtMobile.CustomButton.Name = "";
-            this.TxtMobile.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.TxtMobile.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.TxtMobile.CustomButton.TabIndex = 1;
-            this.TxtMobile.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.TxtMobile.CustomButton.UseSelectable = true;
-            this.TxtMobile.CustomButton.Visible = false;
-            this.TxtMobile.Lines = new string[0];
-            this.TxtMobile.Location = new System.Drawing.Point(152, 177);
-            this.TxtMobile.MaxLength = 32767;
-            this.TxtMobile.Name = "TxtMobile";
-            this.TxtMobile.PasswordChar = '\0';
-            this.TxtMobile.PromptText = "전화번호 머에여?";
-            this.TxtMobile.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.TxtMobile.SelectedText = "";
-            this.TxtMobile.SelectionLength = 0;
-            this.TxtMobile.SelectionStart = 0;
-            this.TxtMobile.ShortcutsEnabled = true;
-            this.TxtMobile.Size = new System.Drawing.Size(176, 23);
-            this.TxtMobile.TabIndex = 6;
-            this.TxtMobile.UseSelectable = true;
-            this.TxtMobile.WaterMark = "전화번호 머에여?";
-            this.TxtMobile.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.TxtMobile.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // TxtEmail
-            // 
-            // 
-            // 
-            // 
-            this.TxtEmail.CustomButton.Image = null;
-            this.TxtEmail.CustomButton.Location = new System.Drawing.Point(154, 1);
-            this.TxtEmail.CustomButton.Name = "";
-            this.TxtEmail.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.TxtEmail.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.TxtEmail.CustomButton.TabIndex = 1;
-            this.TxtEmail.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.TxtEmail.CustomButton.UseSelectable = true;
-            this.TxtEmail.CustomButton.Visible = false;
-            this.TxtEmail.Lines = new string[0];
-            this.TxtEmail.Location = new System.Drawing.Point(153, 211);
-            this.TxtEmail.MaxLength = 32767;
-            this.TxtEmail.Name = "TxtEmail";
-            this.TxtEmail.PasswordChar = '\0';
-            this.TxtEmail.PromptText = "이메일";
-            this.TxtEmail.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.TxtEmail.SelectedText = "";
-            this.TxtEmail.SelectionLength = 0;
-            this.TxtEmail.SelectionStart = 0;
-            this.TxtEmail.ShortcutsEnabled = true;
-            this.TxtEmail.Size = new System.Drawing.Size(176, 23);
-            this.TxtEmail.TabIndex = 7;
-            this.TxtEmail.UseSelectable = true;
-            this.TxtEmail.WaterMark = "이메일";
-            this.TxtEmail.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.TxtEmail.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // TxtUserId
-            // 
-            // 
-            // 
-            // 
-            this.TxtUserId.CustomButton.Image = null;
-            this.TxtUserId.CustomButton.Location = new System.Drawing.Point(154, 1);
-            this.TxtUserId.CustomButton.Name = "";
-            this.TxtUserId.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.TxtUserId.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.TxtUserId.CustomButton.TabIndex = 1;
-            this.TxtUserId.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.TxtUserId.CustomButton.UseSelectable = true;
-            this.TxtUserId.CustomButton.Visible = false;
-            this.TxtUserId.Lines = new string[0];
-            this.TxtUserId.Location = new System.Drawing.Point(152, 245);
-            this.TxtUserId.MaxLength = 32767;
-            this.TxtUserId.Name = "TxtUserId";
-            this.TxtUserId.PasswordChar = '\0';
-            this.TxtUserId.PromptText = "아이디";
-            this.TxtUserId.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.TxtUserId.SelectedText = "";
-            this.TxtUserId.SelectionLength = 0;
-            this.TxtUserId.SelectionStart = 0;
-            this.TxtUserId.ShortcutsEnabled = true;
-            this.TxtUserId.Size = new System.Drawing.Size(176, 23);
-            this.TxtUserId.TabIndex = 8;
-            this.TxtUserId.UseSelectable = true;
-            this.TxtUserId.WaterMark = "아이디";
-            this.TxtUserId.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.TxtUserId.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // TxtPasswords
-            // 
-            // 
-            // 
-            // 
-            this.TxtPasswords.CustomButton.Image = null;
-            this.TxtPasswords.CustomButton.Location = new System.Drawing.Point(154, 1);
-            this.TxtPasswords.CustomButton.Name = "";
-            this.TxtPasswords.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.TxtPasswords.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.TxtPasswords.CustomButton.TabIndex = 1;
-            this.TxtPasswords.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.TxtPasswords.CustomButton.UseSelectable = true;
-            this.TxtPasswords.CustomButton.Visible = false;
-            this.TxtPasswords.Lines = new string[0];
-            this.TxtPasswords.Location = new System.Drawing.Point(153, 279);
-            this.TxtPasswords.MaxLength = 32767;
-            this.TxtPasswords.Name = "TxtPasswords";
-            this.TxtPasswords.PasswordChar = '●';
-            this.TxtPasswords.PromptText = "패스워드";
-            this.TxtPasswords.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.TxtPasswords.SelectedText = "";
-            this.TxtPasswords.SelectionLength = 0;
-            this.TxtPasswords.SelectionStart = 0;
-            this.TxtPasswords.ShortcutsEnabled = true;
-            this.TxtPasswords.Size = new System.Drawing.Size(176, 23);
-            this.TxtPasswords.TabIndex = 9;
-            this.TxtPasswords.UseSelectable = true;
-            this.TxtPasswords.WaterMark = "패스워드";
-            this.TxtPasswords.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.TxtPasswords.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
             // FrmMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -450,7 +450,7 @@ namespace BookRentalShopApp
             this.Controls.Add(this.GrbDetail);
             this.Name = "FrmMember";
             this.Text = "책 멤버 관리";
-            this.Load += new System.EventHandler(this.FrmDivCode_Load);
+            this.Load += new System.EventHandler(this.FrmMember_Load);
             this.GrbDetail.ResumeLayout(false);
             this.GrbDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();

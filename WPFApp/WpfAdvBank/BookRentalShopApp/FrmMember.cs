@@ -9,14 +9,29 @@ namespace BookRentalShopApp
 {
     public partial class FrmMember : MetroForm
     {
+        #region 전역변수
+        private bool IsNew { get; set; }//수정, false 신규
+        #endregion 전역변수 영역
+        
+       
+
+
+        #region 이벤트 영역
         public FrmMember()
         {
             InitializeComponent();
         }
-        #region 전역변수
-        private bool IsNew { get; set; }//수정, false 신규
-        #endregion 전역변수 영역
-        #region 이벤트 영역
+
+        private void FrmMember_Load(object sender, EventArgs e)
+        {
+            IsNew = true; // 신규 초기화
+            RefreshData();
+        }
+        private void FrmDivCode_Resize(object sender, EventArgs e)
+        {
+            DgvData.Height = this.ClientRectangle.Height - 90;
+            GrbDetail.Height = this.ClientRectangle.Height - 90;
+        }
         private void DgvData_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex > -1)//선택된 값이 존재하면
@@ -34,6 +49,17 @@ namespace BookRentalShopApp
                 IsNew = false;
             }
         }
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (CheckValidation() == false) return;
+
+            if (MessageBox.Show(this, "삭제?", "삭제", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+
+            DeleteData();
+            RefreshData();
+            ClearInput();
+        }
+
         private void BtnNew_Click(object sender, EventArgs e)
         {
             ClearInput();
@@ -48,57 +74,11 @@ namespace BookRentalShopApp
             ClearInput();
         }
 
-        private void FrmDivCode_Load(object sender, EventArgs e)
-        {
-            IsNew = true;//신규로 
-            RefreshData();
-        }
-
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            if (CheckValidation() == false) return;
-
-            if (MessageBox.Show(this, "삭제?", "삭제", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-
-            DeleteData();
-            RefreshData();
-            ClearInput();
-        }
-
-        private void FrmDivCode_Resize(object sender, EventArgs e)
-        {
-            DgvData.Height = this.ClientRectangle.Height - 90;
-            GrbDetail.Height = this.ClientRectangle.Height - 90;
-        }
         #endregion
         #region 사용자 영역
         /// <summary>
         /// 삭제처리 프로세스
         /// </summary>
-        private void ClearInput()
-        {
-            TxtIdx.Text = TxtNames.Text = "";
-            TxtMobile.Text = TxtAddr.Text = TxtEmail.Text = "";
-            TxtUserId.Text = "";
-            TxtPasswords.Text = "";
-            CboLevels.SelectedIndex = -1;
-            TxtIdx.ReadOnly = true;
-            IsNew = true;
-        }
-
-        private bool CheckValidation()
-        {
-            if (string.IsNullOrEmpty(TxtIdx.Text) || string.IsNullOrEmpty(TxtNames.Text)||
-                string.IsNullOrEmpty(TxtAddr.Text)||string.IsNullOrEmpty(TxtMobile.Text)||
-                string.IsNullOrEmpty(TxtEmail.Text)||CboLevels.SelectedIndex==-1||
-                string.IsNullOrEmpty(TxtUserId.Text))
-            {
-                MetroMessageBox.Show(this, "빈값삭제불가", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            return true;
-        }
-
         private void DeleteData()
         {
             try
@@ -110,15 +90,11 @@ namespace BookRentalShopApp
                     cmd.Connection = conn;//해당 명령 중 연결이라는 것을 conn에 할당한다.
 
                     var query = "";
+                        query = " DELETE INTO [dbo].[membertbl] " +
+                                " WHERE [Idx]=@Idx ";
+                        cmd.CommandText = query;
 
-                    if (IsNew == true)
-                    {
-                    query = " DELETE INTO [dbo].[membertbl] " +
-                            " WHERE [Idx]=@Idx ";
-                    cmd.CommandText = query;
-                    }
-
-                    SqlParameter pIdx = new SqlParameter("@Idx", SqlDbType.Int);
+                    var pIdx = new SqlParameter("@Idx", SqlDbType.Int);
                     pIdx.Value = TxtNames.Text;
                     cmd.Parameters.Add(pIdx);
 
@@ -140,7 +116,6 @@ namespace BookRentalShopApp
                 MetroMessageBox.Show(this, $"예외발생 : {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void RefreshData()//화면 조회시 사용하는 것.
         {
             try
@@ -173,37 +148,46 @@ namespace BookRentalShopApp
                 //사용자 편의를 위해 가장 많이 쓸 항목이다.
             }
         }
-
         private void SaveData()
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(Helper.Common.ConnString))
                 {
+                    if (conn.State == ConnectionState.Closed) conn.Open();//연결이 닫혀 있다면 연결을 뚫어라
                     SqlCommand cmd = new SqlCommand();//cmd라는 것은 sql 명령의 집합체이다.
                     cmd.Connection = conn;//해당 명령 중 연결이라는 것을 conn에 할당한다.
                     var query = "";
-                    if (conn.State == ConnectionState.Closed) conn.Open();//연결이 닫혀 있다면 연결을 뚫어라
+                    if (IsNew == true) // ISNERT
+                    {
+                        query = @"INSERT INTO [dbo].[membertbl]
+                                       ([Names]
+                                       ,[Levels]
+                                       ,[Addr]
+                                       ,[Mobile]
+                                       ,[Email]
+                                       ,[userID]
+                                       ,[passwords])
+                                 VALUES
+                                       (@Names
+                                       ,@Levels
+                                       ,@Addr
+                                       ,@Mobile
+                                       ,@Email
+                                       ,@userID
+                                       ,@passwords) ";
+                    }
                     else //UPDATE
                     {
-                        query = @"UPDATE INSERT INTO [dbo].[membertbl]
-                                   ([Names]
-                                   ,[Levels]
-                                   ,[Addr]
-                                   ,[Mobile]
-                                   ,[Email]
-                                   ,[userID]
-                                   ,[passwords]
-                                   ,[lastLoginDt]
-                                   ,[loginIpAddr])
-                             VALUES
-                                   (@Names
-                                   ,@Levels
-                                   ,@Addr
-                                   ,@Mobile
-                                   ,@Email
-                                   ,@userID
-                                   ,@passwords;"; 
+                        query = @"UPDATE [dbo].[membertbl]
+                                       SET [Names] = @Names
+                                          ,[Levels] = @Levels
+                                          ,[Addr] = @Addr
+                                          ,[Mobile] = @Mobile
+                                          ,[Email] = @Email
+                                          ,[userID] = @userID
+                                          ,[passwords] = @passwords
+                                     WHERE Idx = @Idx ";
                     }
                     cmd.CommandText = query;
 
@@ -239,16 +223,23 @@ namespace BookRentalShopApp
                     pIdx.Value = TxtIdx.Text;
                     cmd.Parameters.Add(pIdx);
 
+                    if (IsNew == false) // Update 일때만 처리
+                    {
+                        var pIdx = new SqlParameter("@Idx", SqlDbType.Int);
+                        pIdx.Value = TxtIdx.Text;
+                        cmd.Parameters.Add(pIdx);
+                    }
+
                     var result = cmd.ExecuteNonQuery();
                     if (result == 1)
                     {
-                        MetroMessageBox.Show(this, "저장 성공", "저장", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                        MetroMessageBox.Show(this, "저장 성공", "저장",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MetroMessageBox.Show(this, "저장 실패", "저장", MessageBoxButtons.OK,
-                             MessageBoxIcon.Warning);
+                        MetroMessageBox.Show(this, "저장 실패", "저장",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -257,7 +248,38 @@ namespace BookRentalShopApp
                 MetroMessageBox.Show(this, $"예외발생 : {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void ClearInput()//여기서 오류발생함!! 
+        {
+            TxtIdx.Text = TxtNames.Text = "";
+            TxtMobile.Text = TxtAddr.Text = TxtEmail.Text = "";
+            TxtUserId.Text = "";
+            TxtPasswords.Text = "";
+            CboLevels.SelectedIndex = -1;
+            TxtIdx.ReadOnly = true;
+            IsNew = true;
+        }
+
+        private bool CheckValidation()
+        {
+            if (string.IsNullOrEmpty(TxtIdx.Text) || string.IsNullOrEmpty(TxtNames.Text) ||
+                string.IsNullOrEmpty(TxtAddr.Text) || string.IsNullOrEmpty(TxtMobile.Text) ||
+                string.IsNullOrEmpty(TxtEmail.Text) || CboLevels.SelectedIndex == -1 ||
+                string.IsNullOrEmpty(TxtUserId.Text))
+            {
+                MetroMessageBox.Show(this, "빈값삭제불가", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+
+       
+
+      
+
+      
         #endregion
+
+
     }
 }
 //값을 구분할 수 있게 가장 많이 쓰는 값은 flag이다.
