@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace BookRentalShopApp
@@ -21,7 +22,34 @@ namespace BookRentalShopApp
         {
             InitializeComponent();
         }
+        private void ClearInputs()
+        {
+            selMemberIdx = selBookIdx = 0;
+            selMemberName = selBookName = "";
+            TxtIdx.Text = TxtBookName.Text = TxtMemberName.Text = "";
+            DtpRentalDate.Value = DateTime.Now;
+            TxtRetunDate.Text = "";
+            TxtIdx.ReadOnly = true;
+            CboRentalState.SelectedIndex = -1;
 
+            BtnSearchBook.Enabled = BtnSearchMember.Enabled = true;
+            DtpRentalDate.Enabled = true;
+            IsNew = true;
+        }
+       private bool CheckValidation()
+        {
+
+            if(string.IsNullOrEmpty(TxtMemberName.Text)||
+                string.IsNullOrEmpty(TxtBookName.Text)||
+                DtpRentalDate.Value==null||
+                CboRentalState.SelectedIndex < 0)
+            {
+                MetroMessageBox.Show(this, "빈값처리 불가", "경고",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
         private void FrmBooks_Load(object sender, EventArgs e)
         {
             IsNew = true; // 신규 초기화
@@ -88,15 +116,15 @@ namespace BookRentalShopApp
         private void AsignToControls(DataGridViewRow selData)
         {
             TxtIdx.Text = selData.Cells[0].Value.ToString();
-           // TxtAuthor.Text = selData.Cells[1].Value.ToString();
-           // CboDivision.SelectedValue = selData.Cells[2].Value;//B001 = 값이 매칭된다.
-            // sleData.Cell[3] X
-            DtpRentalDate.Text = selData.Cells[4].Value.ToString();
+            selMemberIdx = (int)selData.Cells[1].Value;
+            Debug.WriteLine($">>>>>>> selMemberIdx : {selMemberIdx}");
+            TxtMemberName.Text= selData.Cells[2].Value.ToString();
+            selBookIdx = (int)selData.Cells[3].Value;
+            Debug.WriteLine($">>>>>>> selBookIdx : {selBookIdx}");
+            TxtBookName.Text = selData.Cells[4].Value.ToString(); 
             DtpRentalDate.Value = (DateTime)selData.Cells[5].Value;
-           // TxtISBN.Text = selData.Cells[5].Value.ToString();
-           // TxtPrice.Text = selData.Cells[6].Value.ToString();
-           // TxtDescriptions.Text = selData.Cells[7].Value.ToString();
-            TxtIdx.ReadOnly = true;
+            TxtRetunDate.Text = selData.Cells[6].Value ==null? "" : selData.Cells[6].Value.ToString();
+            CboRentalState.SelectedValue = selData.Cells[7].Value;
         }
 
         /// <summary>
