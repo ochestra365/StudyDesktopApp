@@ -109,7 +109,7 @@ namespace BookRentalShopApp
             Debug.WriteLine($">>>> selBookIdx : {selBookIdx}");
             TxtBookName.Text = selData.Cells[4].Value.ToString();
             DtpRentalDate.Value = (DateTime)selData.Cells[5].Value;
-            TxtReturnDate.Text = selData.Cells[6].Value == null ? "" : selData.Cells[6].Value.ToString();
+            TxtRetunDate.Text = selData.Cells[6].Value == null ? "" : selData.Cells[6].Value.ToString();
             CboRentalState.SelectedValue = selData.Cells[7].Value;
         }
 
@@ -237,8 +237,10 @@ namespace BookRentalShopApp
                     else // UPDATE
                     {
                         query = @"UPDATE [dbo].[rentaltbl]
-                                       SET [returnDate] = GETDATE()
-                                          ,[rentalState] = 'T'
+                                       SET [returnDate] = case @rentalState
+                                                          when 'T' then GETDATE()
+                                                          when 'R then null end
+                                          ,[rentalState] = @rentalState
                                      WHERE Idx = @Idx ";
                     }
                     cmd.CommandText = query;
@@ -263,6 +265,10 @@ namespace BookRentalShopApp
                     }
                     else // 업데이트일땐
                     {
+                        var pRentalState = new SqlParameter("@rentalState", SqlDbType.Char, 1);
+                        pRentalState.Value = CboRentalState.SelectedValue;
+                        cmd.Parameters.Add(pRentalState);
+
                         var pIdx = new SqlParameter("@Idx", SqlDbType.Int);
                         pIdx.Value = TxtIdx.Text;
                         cmd.Parameters.Add(pIdx);
@@ -313,7 +319,7 @@ namespace BookRentalShopApp
             selMemberName = selBookName = "";
             TxtIdx.Text = TxtBookName.Text = TxtMemberName.Text = "";
             DtpRentalDate.Value = DateTime.Now; // 오늘 날짜로 초기화
-            TxtReturnDate.Text = "";
+            TxtRetunDate.Text = "";
             TxtIdx.ReadOnly = true;
             CboRentalState.SelectedIndex = -1;
 

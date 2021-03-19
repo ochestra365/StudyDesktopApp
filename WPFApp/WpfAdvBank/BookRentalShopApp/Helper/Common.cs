@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Net;
 
 namespace BookRentalShopApp.Helper
@@ -32,6 +31,15 @@ namespace BookRentalShopApp.Helper
             }
 
             return localIP;
+        }
+
+        internal static string ReplaceCmdText(string strSource)
+        {
+            var result = strSource.Replace("'", "’");//sql쿼리에 쓰는 것과 다른 거다. 해킹방지에 큰 도움이 된다.
+            result = result.Replace("--", "");
+            result = result.Replace(";", "");
+
+            return result;
         }
     }
 }

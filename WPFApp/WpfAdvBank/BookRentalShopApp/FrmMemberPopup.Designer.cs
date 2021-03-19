@@ -79,7 +79,7 @@ namespace BookRentalShopApp
             this.Name = "FrmMemberPopup";
             this.Resizable = false;
             this.Text = "회원리스트";
-            this.Load += new System.EventHandler(this.FrmMember_Load);
+   
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
             this.ResumeLayout(false);
 

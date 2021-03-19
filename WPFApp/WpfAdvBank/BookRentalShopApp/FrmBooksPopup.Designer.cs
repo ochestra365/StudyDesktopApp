@@ -46,7 +46,7 @@ namespace BookRentalShopApp
             this.DgvData.RowTemplate.Height = 23;
             this.DgvData.Size = new System.Drawing.Size(440, 228);
             this.DgvData.TabIndex = 1;
-            this.DgvData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvData_CellClick_1);
+            this.DgvData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvData_CellClick);
             // 
             // BtnSelelct
             // 
