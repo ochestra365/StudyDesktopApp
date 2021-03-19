@@ -1,5 +1,5 @@
 # StudyDesktopApp
-C# 데스크톱 앱 개발 학습 리포지터리(WPF도 추가해라!@)
+C# 데스크톱 앱 개발 학습 리포지터리(WPF도 추가해라!@), Mahappdesign도 추가
 --------------
 ## StudyDesktopApp에 대하여!
 ~~~
