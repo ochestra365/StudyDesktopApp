@@ -8,15 +8,14 @@
         Title="Login" Height="327" Width="334" Background="LightSteelBlue" Initialized="Window_Initialized">
     <Grid Margin="20" Background="White">
         <StackPanel Margin="20">
-            <Label Content="Login" FontSize="20" HorizontalAlignment="Center"/>
-            <Separator Background="Orange"/>
-            <Label Content="UserName" FontSize="16"/>
-            <TextBox x:Name="TxtUserid" FontFamily="14" Height="25" KeyDown="TxtUserid_KeyDown"/>
-            <Label Content="Password" FontSize="16"/>
-            <PasswordBox x:Name="TxtPassword" FontSize="14" Height="25" KeyDown="TxtPassword_KeyDown"/>
+            <Label Content="Login" FontSize="20" HorizontalAlignment="Center" />
+            <Separator Background="Orange" />
+            <Label Content="UserId" FontSize="16" />
+            <TextBox x:Name="TxtUserId" FontFamily="14" Height="25" KeyDown="TxtUserId_KeyDown" />
+            <Label Content="Password" FontSize="16" />
+            <PasswordBox x:Name="TxtPassword" FontSize="14" Height="25" KeyDown="TxtPassword_KeyDown" />
             <Button x:Name="BtnLogin" Content="로그인" FontSize="16" Width="100" Height="30"
-                    Margin="0,15" Click="BtnLogin_Click"/>
+                    Margin="0, 15" Click="BtnLogin_Click"/>
         </StackPanel>
-        <PasswordBox HorizontalAlignment="Left" Margin="286,175,-100,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>
