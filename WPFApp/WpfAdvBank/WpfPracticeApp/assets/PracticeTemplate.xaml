@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfPracticeApp.assets">
+    <Button x:Key="button" Content="Hello!!"/>
+    <SolidColorBrush x:Key="accentBrush" Color="Red"/>
+    <LinearGradientBrush x:Key="background">
+        <GradientStop Color="#ffdbffe7" Offset="0"/>
+        <GradientStop Color="#ff038822" Offset="1"/>
+    </LinearGradientBrush>
+</ResourceDictionary>

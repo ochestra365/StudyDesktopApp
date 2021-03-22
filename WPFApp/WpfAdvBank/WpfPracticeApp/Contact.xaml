@@ -8,7 +8,13 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Contact" Initialized="Page_Initialized">
-    <Grid Margin="10">
+    <Page.Resources>
+        <ResourceDictionary>
+            <Button x:Key="button" Content="Hello!!"/>
+            <SolidColorBrush x:Key="accentBrush" Color="Red" />
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Margin="10" Background="{StaticResource background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="6*"/>
@@ -26,6 +32,7 @@
         <TextBox x:Name="TxtMessage" Grid.Row="1" Grid.Column="1" Margin="10"/>
 
         <StackPanel  Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Test"  Background="{StaticResource accentBrush}"/>
             <Button x:Name="BtnSend"  Content="Send" Margin="5" Width="100" FontSize="14"/>
             <Button x:Name="BtnCancel"  Content="Cancel" Margin="5" Width="100" FontSize="14"/>
         </StackPanel>
