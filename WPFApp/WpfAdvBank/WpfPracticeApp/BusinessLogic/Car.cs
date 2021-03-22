@@ -11,5 +11,12 @@ namespace WpfPracticeApp.BusinessLogic
     {
         public double Speed { get; set; }
         public Color MainColor { get; set; }//시스템함수와 충돌나지 않게 쓰는 것이 좋다.
+        public Human Driver { get; set; }
+    }
+
+    public class Human
+    {
+        public string Name { get; set; }
+        public bool HasDriveLicense { get; set; }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfPracticeApp.BusinessLogic;
 
 namespace WpfPracticeApp
 {
@@ -28,6 +29,22 @@ namespace WpfPracticeApp
         private void SldChanger_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
+        }
+
+        private void Page_Initialized(object sender, EventArgs e)
+        {
+            var cars = new List<Car>();
+            for (int i = 0; i < 10; i++)
+            {
+                byte red = (byte)(i % 3 == 0 ? 255 : (i * 50) % 255);
+                byte green = 0;
+                byte blue = (byte)(i % 3 == 0 ? 255 : (i * 90) % 255);
+                cars.Add(new Car() { 
+                    Speed = i * 10, 
+                    MainColor = Color.FromRgb(red,green,blue)
+                });
+            }
+            this.DataContext = cars;
         }
     }
 }

@@ -6,13 +6,31 @@
       xmlns:local="clr-namespace:WpfPracticeApp"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Products">
+      Title="Products" Initialized="Page_Initialized">
 
     <Grid Margin="10">
-        <StackPanel>
+        <!--<StackPanel>
             <ProgressBar Value="{Binding Value, ElementName=SldChanger}" Height="20"/>
             <TextBlock Text="{Binding Path=Value, ElementName=SldChanger}" TextAlignment="Center"/>
             <Slider x:Name="SldChanger" Minimum="0" Maximum="100" Value="0"/>
-        </StackPanel>
+        </StackPanel>-->
+        <ComboBox ItemsSource="{Binding}">
+            <ComboBox.ItemTemplate>
+                <ItemContainerTemplate>
+                    <StackPanel>
+                        <TextBlock Text="Speed"/>
+                        <TextBlock Text="{Binding Path=Speed}"/>
+                        <Slider Value="{Binding Speed}" Maximum="300"/>
+                        <TextBlock Text="Color"/>
+                        <Border Height="10">
+                            <Border.Background>
+                                <SolidColorBrush Color="{Binding MainColor}"/>
+                            </Border.Background>
+                        </Border>
+                        <TextBox Text="{Binding MainColor}"/>
+                    </StackPanel>
+                </ItemContainerTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </Grid>
 </Page>

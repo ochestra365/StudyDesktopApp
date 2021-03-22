@@ -198,6 +198,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="assets\Notifier.cs" />
+    <Compile Include="assets\ProductsFactory.cs" />
+    <Compile Include="assets\RelayCommand.cs" />
+    <Compile Include="assets\Talk.cs" />
     <Compile Include="BusinessLogic\Car.cs" />
     <Compile Include="Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
@@ -261,6 +265,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\chat.png" />
+    <Resource Include="assets\contact.jpg" />
+    <Resource Include="assets\velo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
