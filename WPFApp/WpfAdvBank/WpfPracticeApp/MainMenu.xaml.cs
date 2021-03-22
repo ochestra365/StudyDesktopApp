@@ -27,12 +27,12 @@ namespace WpfPracticeApp
 
         private void BtnProducts_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Products.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void BtnLiveSupport_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Discussion.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void BtnEmailSupport_Click(object sender, RoutedEventArgs e)
