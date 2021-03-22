@@ -199,7 +199,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="assets\Notifier.cs" />
-    <Compile Include="assets\ProductsFactory.cs" />
+    <Compile Include="BusinessLogic\ProductsFactory.cs" />
     <Compile Include="assets\RelayCommand.cs" />
     <Compile Include="BusinessLogic\Talk.cs" />
     <Compile Include="BusinessLogic\Car.cs" />

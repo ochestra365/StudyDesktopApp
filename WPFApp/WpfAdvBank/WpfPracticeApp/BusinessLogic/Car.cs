@@ -27,7 +27,17 @@ namespace WpfPracticeApp.BusinessLogic
                 OnPropertyChanged("Speed");//속성값 변경된 것을 알려줌(프로그램)
             } //부가적으로 값을 받아서 처리할 부분이 존재할 때 쓰는 Property이다.
         }
-        public Color MainColor { get; set; }//시스템함수와 충돌나지 않게 쓰는 것이 좋다.
+
+        private Color maincolor;
+        public Color MainColor
+        {
+            get { return maincolor; }
+            set
+            {
+                maincolor = value;
+                OnPropertyChanged("MainColor");
+            } 
+        }//시스템함수와 충돌나지 않게 쓰는 것이 좋다.
         public Human Driver { get; set; }
     }
 
