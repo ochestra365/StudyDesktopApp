@@ -201,7 +201,7 @@
     <Compile Include="assets\Notifier.cs" />
     <Compile Include="assets\ProductsFactory.cs" />
     <Compile Include="assets\RelayCommand.cs" />
-    <Compile Include="assets\Talk.cs" />
+    <Compile Include="BusinessLogic\Talk.cs" />
     <Compile Include="BusinessLogic\Car.cs" />
     <Compile Include="Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>

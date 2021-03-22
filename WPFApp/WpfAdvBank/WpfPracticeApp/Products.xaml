@@ -14,7 +14,7 @@
             <TextBlock Text="{Binding Path=Value, ElementName=SldChanger}" TextAlignment="Center"/>
             <Slider x:Name="SldChanger" Minimum="0" Maximum="100" Value="0"/>
         </StackPanel>-->
-        <ComboBox ItemsSource="{Binding}">
+        <!--<ComboBox ItemsSource="{Binding}" Height="30">
             <ComboBox.ItemTemplate>
                 <ItemContainerTemplate>
                     <StackPanel>
@@ -31,6 +31,7 @@
                     </StackPanel>
                 </ItemContainerTemplate>
             </ComboBox.ItemTemplate>
-        </ComboBox>
+        </ComboBox>-->
+        
     </Grid>
 </Page>
