@@ -55,19 +55,20 @@
 
         <Border Grid.Row="1" Grid.Column="1" Margin="10"
                 BorderBrush="DarkGray" BorderThickness="2"
-                Background="WhiteSmoke">
+                Background="WhiteSmoke"
+                DataContext="{Binding SelectedItem, ElementName=GrdProducts}">
             <StackPanel Margin="10">
                 <Label FontSize="14" FontWeight="ExtraBold"
                        HorizontalContentAlignment="Center"
                        Content="Product Details"/>
                 <TextBlock Text="Title"/>
-                <TextBox Text=""/>
+                <TextBox Text="{Binding Title}"/>
                 <TextBlock Text="Color"/>
+                <TextBox Text="{Binding Color}"/>
+                <Border Height="30" Background="{Binding Color}"/>
+                <TextBlock Text="{Binding price}"/>
                 <TextBox Text=""/>
-                <Border Height="30" />
-                <TextBlock Text="Price"/>
-                <TextBox Text=""/>
-                <TextBlock Text="Reference"/>
+                <TextBlock Text="{Binding Reference}"/>
                 <TextBox Text=""/>
             </StackPanel>
         </Border>
