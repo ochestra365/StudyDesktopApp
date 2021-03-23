@@ -123,7 +123,9 @@ SQL DB에 접속해보자!!!!!!<br>
 Helper의 common 폴더를 이용해서 Secure Coding을 해서 중요한 IP정보나 Password를 Hiding해야 한다.<br>
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/AddressInfoApp/image_for_Github/Helper%EC%BD%94%EB%93%9C.png" width="40%" height="30%" ><br>
 var라는 변수를 통해 sql에 직접적으로 쿼리를 날리는 것이고, 필요한 시스템 도구는 using 함수를 통해서 이용해줘야 한다.<br><br>
-아래의 코드는 가장 중요한 구문이다!!! 실무에서도 자주 쓰일 아주 좋은 것이다.
+아래의 코드는 가장 중요한 구문이다!!! 실무에서도 자주 쓰일 아주 좋은 것이다.<br><br>
+
+
 ~~~
 using System;
 using System.Net;
