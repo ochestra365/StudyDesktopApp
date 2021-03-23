@@ -139,14 +139,14 @@ namespace PhotoResisterMonApp
 
         private ChartValues<int> GetHistorySensors()
         {
-            ChartValues<int> result = null;
+            ChartValues<int> result = new ChartValues<int>();
             try
             {
                 using(SqlConnection conn = new SqlConnection(connString))
                 {
                     if (conn.State == System.Data.ConnectionState.Closed) conn.Open();
 
-                    var query = $@"SELECT  Value
+                    var query = $@"SELECT Value
                                         FROM Tbl_PhotoResister
                                       WHERE CurrentDt > CONVERT(DATETIME, '{DateTime.Now.ToString("yyyy-MM-dd")}')
                                       ORDER BY Idx;";

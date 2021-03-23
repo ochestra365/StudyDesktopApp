@@ -9,6 +9,7 @@
         xmlns:d3="clr-namespace:InteractiveDataDisplay.WPF;assembly=InteractiveDataDisplay.WPF"
         xmlns:local="clr-namespace:PhotoResisterMonApp"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"  
+        xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
         Title="PhotoSensor Monitoring" Height="450" Width="800" Initialized="Window_Initialized">
     <DockPanel>
@@ -79,14 +80,20 @@
                 </Grid.RowDefinitions>
 
                 <Label Content="Sensoring History" Style="{mah:StaticResource MahApps.Styles.ContentControl.FloatingMessageContainer}"/>
-                <lvc:CartesianChart Grid.Row="1" Grid.Column="0">
+                <!--<lvc:CartesianChart Grid.Row="1" Grid.Column="0">
                     <lvc:CartesianChart.Series>
                         <lvc:LineSeries Values="{Binding}" DataLabels="True"/>
                     </lvc:CartesianChart.Series>
                     <lvc:CartesianChart.DataTooltip>
                         <lvc:DefaultTooltip SelectionMode="SharedYValues"></lvc:DefaultTooltip>
                     </lvc:CartesianChart.DataTooltip>
-                </lvc:CartesianChart>
+                </lvc:CartesianChart>-->
+                <oxy:Plot Grid.Row="1" Grid.Column="0">
+                    <oxy:Plot.Series>
+                        <oxy:LineSeries x:Name="HistroyValues" Color="DarkBlue" MarkerType="None"
+                                        Title="PhotoSensor" RenderOptions.EdgeMode="Unspecified"/>
+                    </oxy:Plot.Series>
+                </oxy:Plot>
             </Grid>
         </Grid>
     </DockPanel>
