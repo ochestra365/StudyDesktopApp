@@ -1,5 +1,5 @@
 # StudyDesktopApp
-C# 데스크톱 앱 개발 학습 리포지터리
+C# 데스크톱 앱 개발 학습 리포지터리(WPF및 MahApp방법도 추가)
 --------------
 ## StudyDesktopApp에 대하여!(Code Review를 항상 잘하고, Logic을 이해하고, 나만의 Algorithm을 구성하자!😆)
 ~~~
@@ -87,3 +87,38 @@ ListViewApp 구동화면!<br>
 레스토랑 이미지 리스트<br>
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/RestaurantSelApp/images_for_Github/%EB%A0%88%EC%8A%A4%ED%86%A0%EB%9E%91%20%EC%9D%B4%EB%AF%B8%EC%A7%80%20%EB%A6%AC%EC%8A%A4%ED%8A%B8.png" width="40%" height="30%" ><br><br>
 리스트를 만들고 추가할 수 있는 기능적인 면을 중요시 했다.😁
+-------------
+주소록 앱 초기화면!<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/AddressInfoApp/image_for_Github/%EC%A3%BC%EC%86%8C%EB%A1%9D%20%EC%B4%88%EA%B8%B0%ED%99%94%EB%A9%B4.png" width="40%" height="30%" ><br><br>
+드디어! 데이터베이스와의 접전이다!!😎 가장 중요한 것은 데이터베이스와의 **Connection String을 틔워주는 것이다!!! 아래의 코드는 연결 코드!**<br><br>
+~~~
+ try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))//sql과의 연결을 터준다.
+                {
+                    if (conn.State == ConnectionState.Closed)//파라미터의 상태값이 연결된 상태의 닫힌 값과 같으면
+                        conn.Open();//참일 때 sql커넥션 연결을 튼다. 거짓은 필요없다. 오로지 측정된 참값만 넣으니까
+
+                    var query = $" insert into Tbl_PhotoResister " +
+                                $" (CurrentDt, value, SimulFlag) " +
+                                $" values " +
+                                $" ('{data.Current.ToString("yyyy-MM-dd HH:mm:ss")}','{data.Value}','{(data.SimulFlag==true ? "1" : "0")}'); ";
+                    //sql로 옮기면서 해당 부분의 데이터 타입이 1,0 출력이 아닌 true,false부분으로 나뉜다.
+                    //value뒷부분은 쿼리문에서 들어가는 실제 데이터값에 해당하면 이를 측정하여 날리는 경로는 C#에서 한다.
+                    //라즈베리파이에서 측정한 값을 C#에서 측정하고, 이를 query 문자데이터타입으로 ssms에 날려서 기입하게 만든다.
+                    SqlCommand cmd = new SqlCommand(query, conn);//cmd라는 것은 쿼리문 날린 것을 연결해주는 클래스(기능)을 의미한다.
+                    cmd.ExecuteNonQuery(); //메서드 연산을 호출해 주는 곳이 없으니 여기서 호출해준다.
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"예외발생 : {ex.Message}");//오류가 발생하면 디버그를 하고 메세지를 사용자에게 알린다.
+            }
+~~~
+<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/AddressInfoApp/image_for_Github/%EC%97%B0%EA%B2%B0%EC%B6%94%EA%B0%80%ED%99%94%EB%A9%B4.png" width="40%" height="30%" ><br>
+SQL DB에 접속해보자!!!!!!<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/AddressInfoApp/image_for_Github/%EC%97%B0%EA%B2%B0%EB%8F%84%EC%A4%91%ED%99%94%EB%A9%B4.png" width="40%" height="30%" ><br>
+해커에게 가장 노출되어서 안되는 점은 나의 IP주소와 비밀번호다! 이거 잘못하면 SQL Injection을 통해 다 지워버린다!<br>
+common 폴더를 이용해서 Secure Coding을 해서 중요한 IP정보나 Password를 Hiding해야 한다.<br>
+var라는 변수를 통해 sql에 직접적으로 쿼리를 날리는 것이고, 필요한 시스템 도구는 using 함수를 통해서 이용해줘야 한다.
