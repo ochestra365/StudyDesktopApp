@@ -14,7 +14,7 @@
             <SolidColorBrush x:Key="accentBrush" Color="Red" />
         </ResourceDictionary>
     </Page.Resources>
-    <Grid Margin="10" Background="{StaticResource background}">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="6*"/>
@@ -32,7 +32,7 @@
         <TextBox x:Name="TxtMessage" Grid.Row="1" Grid.Column="1" Margin="10"/>
 
         <StackPanel  Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="BtnSend"  Content="Send" Margin="5" Width="100" FontSize="14" Background="{StaticResource MahApps.Brushes.Button.Flat.Background.MouseOver}"/>
+            <Button x:Name="BtnSend"  Content="Send" Margin="5" Width="100" FontSize="14" />
             <Button x:Name="BtnCancel"  Content="Cancel" Margin="5" Width="100" FontSize="14"/>
         </StackPanel>
     </Grid>
