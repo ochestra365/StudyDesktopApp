@@ -67,7 +67,8 @@ OS/2, 윈도즈 등의 운영 체계(OS) 본래 기능으로, 소프트웨어의
 3. ![TimerApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/TimerApp)
 4. ![TravelWishApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/TravelWishApp)
 5. ![WPFApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/WPFApp)
-6. ![WinformApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/WinformApp)<br>
+6. ![WinformApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/WinformApp)
+7. ![WPFApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/WPFApp)
 -------------
 ###ListViewApp 구동화면!<br>
 리스트 화면이다.<br>
