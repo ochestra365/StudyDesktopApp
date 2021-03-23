@@ -48,6 +48,18 @@ sql 상에서 테이블 스크립팅을 이용하는 것이 오탈자를 줄일 
 실무역량을 쌓기 위해서는 C#200제를 다 풀어볼 필요가 있다고 생각함.
 Metro를 통해서 UI를 좀 더 친숙하게 꾸밀 수 있다.
 ~~~
+
+~~~
+라즈베리파이는 동적 통신으로 데이터를 보내서 해결한다. 데이터를 모아서 DB로 모은다. clr은 dll을 참조한다는 의미이다.
+DLL
+[ dynamic linking library ]
+
+OS/2, 윈도즈 등의 운영 체계(OS) 본래 기능으로, 소프트웨어의 루틴을 몇 개의 파일로 나누어 디스크에 두고 필요한 것만을 실행 메모리에 실어서 사용하기 위한 파일. DLL로 사용되는 파일은 확장자가 ‘dll’로 되어 있기 때문에 ‘DLL 파일’이라고 부른다. DLL의 장점은 루틴을 공통으로 사용하는 것이다. 루틴의 함수 집단을 자료집이라고 하는데, 보통 실행 파일을 작성할 때 자료집을 포함해서 컴파일하는 경우가 많다. 그러나 이 방법은 동일 루틴을 다수의 실행 파일이 갖게 되어 비효율적이다. DLL은 다수의 실행 파일에 공유될 수 있기 때문에 디스크 용량이나 메모리를 절약할 수 있다. 또 프로그램을 수정하려는 경우, DLL 파일만을 수정함으로써 완료되는 경우도 있다. 윈도즈 등에서는 OS 기능은 물론 DLL을 애플리케이션과 공유할 수도 있으나, DLL 파일 등의 애플리케이션이 공유되고 있는지는 이용자 수준에서는 판단하기가 어렵다.
+[네이버 지식백과] DLL [dynamic linking library] (IT용어사전, 한국정보통신기술협회)
++= 텝을 눌러서 메서드를 만들어야 참조가 올바르게 된다.
+
+트래픽은 네트워크를 왔다갔따하는 것을 일컫는 것이다. Nlog를 써야 유지보수가 쉬워진다. 로그가 가장 중요하다.
+~~~
 ---------------
 ## 목차
 1. ![ListViewApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/ListViewApp)
@@ -55,8 +67,17 @@ Metro를 통해서 UI를 좀 더 친숙하게 꾸밀 수 있다.
 3. ![TimerApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/TimerApp)
 4. ![TravelWishApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/TravelWishApp)
 5. ![WPFApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/WPFApp)
-6. ![WinformApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/WinformApp)<br>
+6. ![WinformApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/WinformApp)
+7. ![WPFApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/WPFApp)<br><br>
+소스코드는 해당 목차에서 확인할 수 있다!!
 -------------
 ###ListViewApp 구동화면!<br>
 리스트 화면이다.<br>
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%EB%A6%AC%EC%8A%A4%ED%8A%B8.png" width="40%" height="30%" ><br>
+자세히 화면이다.<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%EC%9E%90%EC%84%B8%ED%9E%88.png" width="40%" height="30%" ><br>
+작은 아이콘 화면이다.<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%EC%9E%91%EC%9D%80%EC%95%84%EC%9D%B4%EC%BD%98.png" width="40%" height="30%" ><br>
+큰 아이콘 화면이다.<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%ED%81%B0%20%EC%95%84%EC%9D%B4%EC%BD%98.png" width="40%" height="30%" ><br>
+
