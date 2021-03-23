@@ -20,6 +20,7 @@ using System.Windows.Threading;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Data;
+using OxyPlot;
 
 namespace PhotoResisterMonApp
 {
@@ -43,9 +44,12 @@ namespace PhotoResisterMonApp
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public MainWindow()
         {
             InitializeComponent();
+
+            logger.Info("PhotoSensorMonApp Initialized....");
         }
 
         public ChartValues<int> ChartValues { get;set; }
@@ -87,10 +91,12 @@ namespace PhotoResisterMonApp
                                                 Convert.ToBoolean(temp["SimulFlag"]));
                     }
                 }
+                logger.Info("GetRealTimeSensor() completed");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"예외발생: {ex.Message}");
+                logger.Error($"GetRealTimeSensor() error occured : {ex.Message}");
             }
 
             return result;
@@ -133,20 +139,20 @@ namespace PhotoResisterMonApp
 
         private void MnuLoad_Click(object sender, RoutedEventArgs e)
         {
-            ChartValues= GetHistorySensors();
+            HistroyValues.ItemsSource= GetHistorySensors();
             GrdHistory.DataContext = ChartValues;
         }
 
-        private ChartValues<int> GetHistorySensors()
+        private List<DataPoint> GetHistorySensors()
         {
-            ChartValues<int> result = new ChartValues<int>();
+            List<DataPoint> result = new List<DataPoint>();
             try
             {
                 using(SqlConnection conn = new SqlConnection(connString))
                 {
                     if (conn.State == System.Data.ConnectionState.Closed) conn.Open();
 
-                    var query = $@"SELECT Value
+                    var query = $@"SELECT Idx, Value
                                         FROM Tbl_PhotoResister
                                       WHERE CurrentDt > CONVERT(DATETIME, '{DateTime.Now.ToString("yyyy-MM-dd")}')
                                       ORDER BY Idx;";
@@ -155,13 +161,15 @@ namespace PhotoResisterMonApp
 
                     while (reader.Read())
                     {
-                        result.Add(Convert.ToInt32(reader[0]));
+                        result.Add(new DataPoint(Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1])));
                     }
                 }
+                logger.Info("GetHistorySensors() completed");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"예외 발생 : {ex.Message}");
+                logger.Error($"GetHistorySensors() error occured : {ex.Message}");
             }
             return result;
         }
