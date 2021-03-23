@@ -120,10 +120,25 @@ namespace IoTSensorMonApp
             timerSimul.Tick += TimerSimul_Tick;
             timerSimul.Start();
         }
+
+        private long timeSpan = 0;//시간흐름값
+        private int randMaxVal = 0;//랜덤값을 담을 변수.
         //프로그레스바와 리스트, 차트에 기입해줘야 한다.
         private void TimerSimul_Tick(object sender, EventArgs e)//1초에 한번씩 데이터를 출력하는 것이다.
         {
-            int value = randPhoto.Next(2, 1023);//1부터 1023까지 사이의 값을 받는다.
+            timeSpan += 1;
+            var temp = timeSpan & 30;//10,11,12,29,30-->0
+
+            if(temp.ToString().Length==2)
+            {
+                randMaxVal = 980;
+            }
+            else
+            {
+                randMaxVal = 120;
+            }
+
+            int value = randPhoto.Next(randMaxVal-40, 1023);//1부터 1023까지 사이의 값을 받는다.
             ShowSensorValue(value.ToString());//value값을 문자타입으로 넘겨준다.
         }
         /// <summary>

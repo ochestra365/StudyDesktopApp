@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernUITestApp", "ModernUI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfPracticeApp", "WpfPracticeApp\WpfPracticeApp.csproj", "{552090B3-0683-4B7D-A236-00E4A4BCB4A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoResisterMonApp", "PhotoResisterMonApp\PhotoResisterMonApp.csproj", "{CEE94CCF-CD2C-4568-AD1B-918436312FA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{552090B3-0683-4B7D-A236-00E4A4BCB4A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{552090B3-0683-4B7D-A236-00E4A4BCB4A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{552090B3-0683-4B7D-A236-00E4A4BCB4A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEE94CCF-CD2C-4568-AD1B-918436312FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEE94CCF-CD2C-4568-AD1B-918436312FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEE94CCF-CD2C-4568-AD1B-918436312FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEE94CCF-CD2C-4568-AD1B-918436312FA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
