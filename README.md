@@ -1,7 +1,7 @@
 # StudyDesktopApp
-C# 데스크톱 앱 개발 학습 리포지터리(WPF도 추가해라!@), Mahappdesign도 추가
+C# 데스크톱 앱 개발 학습 리포지터리
 --------------
-## StudyDesktopApp에 대하여!
+## StudyDesktopApp에 대하여!(Code Review를 항상 잘하고, Logic을 이해하고, 나만의 Algorithm을 구성하자!😆)
 ~~~
 해당 챕터는 윈폼과 WPF를 이용한 것이다. object에 pix 태그를 달아서 알아보기 쉽게 표현해놓았지만
 직관적이지 않다!
@@ -71,7 +71,7 @@ OS/2, 윈도즈 등의 운영 체계(OS) 본래 기능으로, 소프트웨어의
 7. ![WPFApp](https://github.com/ochestra365/StudyDesktopApp/tree/main/WPFApp)<br><br>
 소스코드는 해당 목차에서 확인할 수 있다!!
 -------------
-###ListViewApp 구동화면!<br>
+ListViewApp 구동화면!<br>
 리스트 화면이다.<br>
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%EB%A6%AC%EC%8A%A4%ED%8A%B8.png" width="40%" height="30%" ><br>
 자세히 화면이다.<br>
@@ -79,5 +79,11 @@ OS/2, 윈도즈 등의 운영 체계(OS) 본래 기능으로, 소프트웨어의
 작은 아이콘 화면이다.<br>
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%EC%9E%91%EC%9D%80%EC%95%84%EC%9D%B4%EC%BD%98.png" width="40%" height="30%" ><br>
 큰 아이콘 화면이다.<br>
-<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%ED%81%B0%20%EC%95%84%EC%9D%B4%EC%BD%98.png" width="40%" height="30%" ><br>
-
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%ED%81%B0%20%EC%95%84%EC%9D%B4%EC%BD%98.png" width="40%" height="30%" ><br><br>
+윈폼의 ListBox를 활용한 앱 구동원리를 배울 수 있었다. 속성의 네임을 잘 정하고, 윈폼화면을 먼저 구성하는 것이 작업효율이 높다.
+-------------
+레스토랑 초기화면!<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/RestaurantSelApp/images_for_Github/%EB%A0%88%EC%8A%A4%ED%86%A0%EB%9E%91%EC%B4%88%EA%B8%B0%ED%99%94%EB%A9%B4.png" width="40%" height="30%" ><br>
+레스토랑 이미지 리스트<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/RestaurantSelApp/images_for_Github/%EB%A0%88%EC%8A%A4%ED%86%A0%EB%9E%91%20%EC%9D%B4%EB%AF%B8%EC%A7%80%20%EB%A6%AC%EC%8A%A4%ED%8A%B8.png" width="40%" height="30%" ><br><br>
+리스트를 만들고 추가할 수 있는 기능적인 면을 중요시 했다.😁
