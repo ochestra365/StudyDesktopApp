@@ -17,23 +17,34 @@
                 <MenuItem.Icon>
                     <iconPacks:PackIconMaterial Kind="MonitorEye" Width="14"/>
                 </MenuItem.Icon>
-                <MenuItem Header="시작(_B)">
+                <MenuItem x:Name="MnuStart" Header="시작(_B)" Click="MnuStart_Click" >
                     <MenuItem.Icon>
                         <iconPacks:PackIconForkAwesome Kind="PlayCircle" Width="14"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="종료(_S)">
+                <MenuItem  x:Name="MnuStop" Header="종료(_S)" Click="MnuStop_Click">
                     <MenuItem.Icon>
                         <iconPacks:PackIconForkAwesome Kind="StopCircle" Width="14"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="프로그램 종료(_X)">
+                <MenuItem  x:Name="MnuExit" Header="프로그램 종료(_X)" Click="MnuExit_Click">
                     <MenuItem.Icon>
                         <iconPacks:PackIconForkAwesome Kind="SignOut" Width="14"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="히스토리(_H)">
+                <MenuItem.Icon>
+                    <iconPacks:PackIconMaterial Kind="ChartLine" Width="14"/>
+                </MenuItem.Icon>
+                <MenuItem x:Name="MnuLoad" Header="가져오기(_L)" Click="MnuLoad_Click">
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconForkAwesome Kind="Refresh" Width="14"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+         
         </Menu>
 
         <Grid Background="WhiteSmoke">
@@ -48,14 +59,14 @@
                     <RowDefinition Height="9*"/>
                 </Grid.RowDefinitions>
                 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="RealTime Monitoring"/>
+                <Label Grid.Row="0" Grid.Column="0" Content="RealTime Monitoring" Style="{mah:StaticResource MahApps.Styles.ContentControl.FloatingMessageContainer}"/>
                 <!--<d3:Chart Grid.Row="1" Grid.Column="0" BottomTitle="Aurgument" LeftTitle="Fuction">
                     <d3:LineGraph x:Name="ChtLine"
                                   Description="Simple Linechart" Stroke="DarkBlue" StrokeThickness="3"/>
                 </d3:Chart>-->
                 <lvc:AngularGauge Grid.Row="1" Grid.Column="0" Value="{Binding}"  x:Name="RealTimeSensor" ToValue="1023" TicksStep="100" TicksForeground="Black" Foreground="White" FontWeight="Bold" FontSize="16" SectionsInnerRadius="0.1">
                     <lvc:AngularGauge.Sections>
-                        <lvc:AngularSection FromValue="0" ToValue="700" Fill="Beige"/>
+                        <lvc:AngularSection FromValue="0" ToValue="700" Fill="Gray"/>
                         <lvc:AngularSection FromValue="700" ToValue="1023" Fill="Black"/>
                     </lvc:AngularGauge.Sections>
                 </lvc:AngularGauge>
@@ -67,7 +78,7 @@
                     <RowDefinition Height="9*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Sensoring History"/>
+                <Label Content="Sensoring History" Style="{mah:StaticResource MahApps.Styles.ContentControl.FloatingMessageContainer}"/>
                 <lvc:CartesianChart Grid.Row="1" Grid.Column="0">
                     <lvc:CartesianChart.Series>
                         <lvc:LineSeries Values="{Binding}" DataLabels="True"/>
