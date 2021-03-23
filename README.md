@@ -1,5 +1,5 @@
 # StudyDesktopApp
-C# 데스크톱 앱 개발 학습 리포지터리
+C# 데스크톱 앱 개발 학습 리포지터리(WPF및 MahApp방법도 추가)
 --------------
 ## StudyDesktopApp에 대하여!(Code Review를 항상 잘하고, Logic을 이해하고, 나만의 Algorithm을 구성하자!😆)
 ~~~
@@ -120,4 +120,5 @@ ListViewApp 구동화면!<br>
 SQL DB에 접속해보자!!!!!!<br>
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/AddressInfoApp/image_for_Github/%EC%97%B0%EA%B2%B0%EB%8F%84%EC%A4%91%ED%99%94%EB%A9%B4.png" width="40%" height="30%" ><br>
 해커에게 가장 노출되어서 안되는 점은 나의 IP주소와 비밀번호다! 이거 잘못하면 SQL Injection을 통해 다 지워버린다!<br>
-common 폴더를 이용해서 Secure Coding을 해서 중요한 IP정보나 Password를 Hiding해야 한다.
+common 폴더를 이용해서 Secure Coding을 해서 중요한 IP정보나 Password를 Hiding해야 한다.<br>
+var라는 변수를 통해 sql에 직접적으로 쿼리를 날리는 것이고, 필요한 시스템 도구는 using 함수를 통해서 이용해줘야 한다.
