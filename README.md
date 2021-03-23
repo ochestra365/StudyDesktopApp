@@ -73,3 +73,10 @@ OS/2, 윈도즈 등의 운영 체계(OS) 본래 기능으로, 소프트웨어의
 ###ListViewApp 구동화면!<br>
 리스트 화면이다.<br>
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%EB%A6%AC%EC%8A%A4%ED%8A%B8.png" width="40%" height="30%" ><br>
+자세히 화면이다.<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%EC%9E%90%EC%84%B8%ED%9E%88.png" width="40%" height="30%" ><br>
+작은 아이콘 화면이다.<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%EC%9E%91%EC%9D%80%EC%95%84%EC%9D%B4%EC%BD%98.png" width="40%" height="30%" ><br>
+큰 아이콘 화면이다.<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/ListViewApp/Images/%ED%81%B0%20%EC%95%84%EC%9D%B4%EC%BD%98.png" width="40%" height="30%" ><br>
+
