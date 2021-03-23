@@ -19,6 +19,7 @@ using System.Threading;
 using System.Windows.Threading;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Data;
 
 namespace PhotoResisterMonApp
 {
@@ -47,7 +48,7 @@ namespace PhotoResisterMonApp
             InitializeComponent();
         }
 
-        public ChartValues<float> ChartValues { get;set; }
+        public ChartValues<int> ChartValues { get;set; }
 
         public int SensorValue { get; set; }
 
@@ -101,7 +102,7 @@ namespace PhotoResisterMonApp
             //var x = Enumerable.Range(0, 1001).Select(i => i / 10.0).ToArray();
             //var y = x.Select(v => Math.Abs(v) < 1e-1 ? 1 : Math.Sin(v) / v).ToArray();
             //ChtLine.Plot(x, y);
-            ChartValues = new ChartValues<float>() { 5, 8, 3, 2, 5.6f, 3.14f, 9.9f };
+            ChartValues = new ChartValues<int>();// { 5, 8, 3, 2, 5, 3, 9 };
             GrdHistory.DataContext = ChartValues;
 
             CustomTimer = new DispatcherTimer();
@@ -132,7 +133,37 @@ namespace PhotoResisterMonApp
 
         private void MnuLoad_Click(object sender, RoutedEventArgs e)
         {
+            ChartValues= GetHistorySensors();
+            GrdHistory.DataContext = ChartValues;
+        }
 
+        private ChartValues<int> GetHistorySensors()
+        {
+            ChartValues<int> result = null;
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connString))
+                {
+                    if (conn.State == System.Data.ConnectionState.Closed) conn.Open();
+
+                    var query = $@"SELECT  Value
+                                        FROM Tbl_PhotoResister
+                                      WHERE CurrentDt > CONVERT(DATETIME, '{DateTime.Now.ToString("yyyy-MM-dd")}')
+                                      ORDER BY Idx;";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        result.Add(Convert.ToInt32(reader[0]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"예외 발생 : {ex.Message}");
+            }
+            return result;
         }
     }
 }
