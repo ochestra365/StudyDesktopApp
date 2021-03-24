@@ -1,5 +1,7 @@
 # StudyDesktopApp
 C# 데스크톱 앱 개발 학습 리포지터리(WPF및 MahApp방법도 추가)
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/%EC%88%98%EB%8B%AC.png" width="40%" height="30%" ><br><br>
+하느님..이해가 잘되게 해주세요..
 --------------
 ## StudyDesktopApp에 대하여!(Code Review를 항상 잘하고, Logic을 이해하고, 나만의 Algorithm을 구성하자!😆)
 ~~~
@@ -184,4 +186,66 @@ ip와 password는 해당 코드에서 가렸다. 캡슐화를 통해서 정보�
 ▶ 사용<br><br>
  - 경험담 : 일관성 없는 엑세스 가능성 에러가 떴을 때 클래스를 internal 로 변경해주니 에러 사라짐<br><br>
 
+-------------
+NUGET 패키지!<br><br>
 
+누겟 패키지란 무엇인가?<br>
+쉽게 말해 HTML의 CSS같은 것이다! User Interface를 위해서 하는 것이며, 라이센스는 MIT것을 쓰는 것이 좋다.<br>엑셀은 NPOI<br><br> 그리고 로그를 계속 찍어주는 NLoG도 깔아줘야 유지보수가 쉽다!
+
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/Json%EC%BD%94%EB%93%9C.png" width="40%" height="30%" ><br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/Nuget%ED%8C%A8%ED%82%A4%EC%A7%80%EC%97%90%EC%84%9C%20%EA%B9%94%EC%95%84%EB%B3%B8%20%EA%B2%83%EB%93%A4.png" width="40%" height="30%" ><br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/%EC%8A%B9%EC%9D%B8%EB%82%9C%20%ED%99%94%EB%A9%B4.png" width="40%" height="30%" ><br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/%ED%82%A4%EC%9E%85%EB%A0%A5.png" width="40%" height="30%" ><br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/%ED%95%AD%EC%83%81%EB%B3%B5%EC%82%AC%EC%8B%9C%EC%BC%9C%EC%A4%80%20%EC%97%91%EC%85%80%ED%8C%8C%EC%9D%BC.png" width="40%" height="30%" ><br>
+NPOI Load 예제
+~~~
+using MahApps.Metro.Controls;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows;
+
+namespace FineDustMonApp
+{
+    /// <summary>
+    /// MainWindow.xaml에 대한 상호 작용 논리
+    /// </summary>
+    public partial class MainWindow : MetroWindow
+    {
+        private readonly string excelPath = $@"{AppDomain.CurrentDomain.BaseDirectory}busan_station_list.xls";
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            //엑셀파일에서 측정소 가져오기
+            IWorkbook wb = null;
+            ISheet sh = null;
+
+            using(FileStream fs = new FileStream(excelPath, FileMode.Open, FileAccess.Read))//경로 설정, 경로 열고, 경로 읽는다.
+            {
+                wb = new HSSFWorkbook(fs);
+            }
+
+            List<string> lstLabs = new List<string>();//컬렉션 생성
+
+            sh = wb.GetSheetAt(0);//시트 1번에서 데이터를 읽어온다.
+            int rowCount = sh.LastRowNum;//마지막까지 행값을 읽는다.
+          
+
+            for (int r = 0; r < rowCount; r++)
+            {
+                if (r == 0) continue;
+                lstLabs.Add(sh.GetRow(r).Cells[1].ToString());//리스트에 행들을 다 읽어서 넣어주겠따.
+                CboStations.ItemsSource = lstLabs;
+            }
+        }
+    }
+}
+
+~~~
