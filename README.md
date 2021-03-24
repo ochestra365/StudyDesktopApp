@@ -185,5 +185,14 @@ ip와 password는 해당 코드에서 가렸다. 캡슐화를 통해서 정보�
   - 한 프로젝트가 뽑아내는 결과물<br><br>
 ▶ 사용<br><br>
  - 경험담 : 일관성 없는 엑세스 가능성 에러가 떴을 때 클래스를 internal 로 변경해주니 에러 사라짐<br><br>
+
 -------------
-**
+NUGET 패키지!<br><br>
+
+누겟 패키지란 무엇인가?<br>
+쉽게 말해 HTML의 CSS같은 것이다! User Interface를 위해서 하는 것이며, 라이센스는 MIT것을 쓰는 것이 좋다.<br>
+
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/Json%EC%BD%94%EB%93%9C.png" width="40%" height="30%" ><br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/Nuget%ED%8C%A8%ED%82%A4%EC%A7%80%EC%97%90%EC%84%9C%20%EA%B9%94%EC%95%84%EB%B3%B8%20%EA%B2%83%EB%93%A4.png" width="40%" height="30%" ><br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/%EC%8A%B9%EC%9D%B8%EB%82%9C%20%ED%99%94%EB%A9%B4.png" width="40%" height="30%" ><br>
+
