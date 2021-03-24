@@ -17,10 +17,10 @@ namespace WpfTestApp
             switch ((string)parameter)
             {
                 case "FormatLastFirst":
-                    name = $"{values[1]},{values[0]}";//뒤집어서 포맷팅
+                    name = values[1]+","+values[0];//뒤집어서 포맷팅
                     break;
                 default:
-                    name = $"{values[0]},{values[1]}";//기본
+                    name = values[0] + "," + values[1];//기본
                     break;
             }
             return name;
@@ -28,7 +28,9 @@ namespace WpfTestApp
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            var splitValues = ((string)value).Split(' ');
+            return splitValues;
         }
     }
 }
