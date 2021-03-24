@@ -120,5 +120,68 @@ ListViewApp 구동화면!<br>
 SQL DB에 접속해보자!!!!!!<br>
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/AddressInfoApp/image_for_Github/%EC%97%B0%EA%B2%B0%EB%8F%84%EC%A4%91%ED%99%94%EB%A9%B4.png" width="40%" height="30%" ><br>
 해커에게 가장 노출되어서 안되는 점은 나의 IP주소와 비밀번호다! 이거 잘못하면 SQL Injection을 통해 다 지워버린다!<br>
-common 폴더를 이용해서 Secure Coding을 해서 중요한 IP정보나 Password를 Hiding해야 한다.<br>
-var라는 변수를 통해 sql에 직접적으로 쿼리를 날리는 것이고, 필요한 시스템 도구는 using 함수를 통해서 이용해줘야 한다.
+Helper의 common 폴더를 이용해서 Secure Coding을 해서 중요한 IP정보나 Password를 Hiding해야 한다.<br>
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/AddressInfoApp/image_for_Github/Helper%EC%BD%94%EB%93%9C.png" width="40%" height="30%" ><br>
+var라는 변수를 통해 sql에 직접적으로 쿼리를 날리는 것이고, 필요한 시스템 도구는 using 함수를 통해서 이용해줘야 한다.<br><br>
+아래의 코드는 가장 중요한 구문이다!!! 실무에서도 자주 쓰일 아주 좋은 것이다.<br><br>
+
+
+~~~
+using System;
+using System.Net;
+
+namespace BookRentalShopApp.Helper
+{
+    public class Common
+    {
+        public static string ConnString = "Data Source=@@@@@@@@@@@;" +
+            "Initial Catalog=bookrentalshop;" +
+            "Persist Security Info=True;" +
+            "User ID=sa;" +
+            "Password=@@@@@@@@@@@@";
+
+        public static string LoginUserId = string.Empty;
+
+        /// <summary>
+        /// 아이피주소 받아오는 메서드
+        /// </summary>
+        /// <returns></returns>
+        internal static string GetLocalIp()
+        {
+            string localIP = "";
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)//주소리스트에 들어있는 것에 한번씩 반복 적용되는 것이다.
+            {
+                if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    localIP = ip.ToString();
+                    break;
+                }
+            }
+
+            return localIP;
+        }
+
+        internal static string ReplaceCmdText(string strSource)//SQL INJECTION 방지구문
+        {
+            var result = strSource.Replace("'", "’");//sql쿼리에 쓰는 것과 다른 거다. 해킹방지에 큰 도움이 된다. 작은 따옴표를 다른 것으로 변환시켜 침투를 방지한다.
+            result = result.Replace("--", "");//주석처리하는 거를 날리면 공백으로 반환하겠다.
+            result = result.Replace(";", "");//실행 처리에 필요한 ;를 공백으로 날려버리겠다.
+
+            return result;
+        }
+    }
+~~~
+<br>
+ip와 password는 해당 코드에서 가렸다. 캡슐화를 통해서 정보를 은닉해야 하는 것이다. 당연히 Helper 폴더에는 많은 참조가 걸려있다. 18개나 걸려있었다.<br>
+이때 중요한 접근 한정자는 internal이다. 이것이 핵심이다.!!<br>
+▶ 접근 한정자 중 하나<br><br>
+▶ 뜻 : 내부적인<br><br>
+▶ 해당 접근 지정자가 선언된 클래스, 변수, 함수, 형식 등등은 같은 어셈블리 내에서만 접근 가능<br><br>
+ - 즉 해당 프로젝트에서 public 처럼 사용 가능하고, 외부에서는 private<br><br>
+ - 어셈블리<br><br>
+  - 한 프로젝트가 뽑아내는 결과물<br><br>
+▶ 사용<br><br>
+ - 경험담 : 일관성 없는 엑세스 가능성 에러가 떴을 때 클래스를 internal 로 변경해주니 에러 사라짐<br><br>
+
+
