@@ -225,10 +225,14 @@ namespace FineDustMonApp
     public partial class MainWindow : MetroWindow
     {
         private readonly string excelPath = $@"{AppDomain.CurrentDomain.BaseDirectory}busan_station_list.xls";
+
+        private string stationName = "";
         private string openApiUrl = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?" +
             "serviceKey=cbuOX7pcf5ks83BOnRHQuesdDZ446xEaHEr5az1XlAcQkkO1YS7LDBD1zEs4YkwqWx0IKRh8G%2FUXmQUYaHkP0Q%3D%3D&" +//서비스 키는 본인의 것이다.
             "returnType=xml&" +
-            "numOfRows=100&pageNo=1&" +
+            "numOfRows=100&" +
+            "pageNo=1&"+
+            "dataTerm=DAILY&"+
             "ver=1.0&"+
             "stationName=";//가장 실수를 많이하게 되는 부분이다.
         //요런 형식으로 바꿔주고, stationName만 읽는 형식으로 고쳐줘야 한다.
@@ -277,7 +281,7 @@ namespace FineDustMonApp
                 openApiUrl += CboStations.SelectedItem.ToString();//문자열로 다 날린다.
                 XmlDocument xml = new XmlDocument();
                 xml.Load(openApiUrl);
-                XmlNodeList xnList = xml.SelectNodes("/response/body/items/item");//xml의 body 부분만 사용해라 head부분은 필요없다.
+                XmlNodeList xnList = xml.SelectNodes("/response/body/items/item");//xml의 body 부분만 사용해라 head부분은 필요없다. 그리고 소속된 경로를 잘 설정해주어야 한다.
 
                 foreach (XmlNode item in xnList)
                 {
@@ -296,6 +300,7 @@ namespace FineDustMonApp
         private List<FineDustInfo> lstResult;
     }
 }
+
 
 
 ~~~
