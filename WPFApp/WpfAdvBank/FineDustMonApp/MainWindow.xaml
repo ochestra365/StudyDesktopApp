@@ -28,7 +28,6 @@
                 Grid.Row="1" Grid.Column="0" Margin="5"
                 AutoGenerateColumns="True" SelectionUnit="FullRow" ItemsSource="{Binding}"
                 Style="{StaticResource MahApps.Styles.DataGrid.Azure}">
-                
             </DataGrid>
         </ComboBox>
     </Grid>
