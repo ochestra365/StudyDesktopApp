@@ -190,7 +190,7 @@ ip와 password는 해당 코드에서 가렸다. 캡슐화를 통해서 정보�
 NUGET 패키지!<br><br>
 
 누겟 패키지란 무엇인가?<br>
-쉽게 말해 HTML의 CSS같은 것이다! User Interface를 위해서 하는 것이며, 라이센스는 MIT것을 쓰는 것이 좋다.<br>
+쉽게 말해 HTML의 CSS같은 것이다! User Interface를 위해서 하는 것이며, 라이센스는 MIT것을 쓰는 것이 좋다.<br>엑셀은 엔포이
 
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/Json%EC%BD%94%EB%93%9C.png" width="40%" height="30%" ><br>
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/Nuget%ED%8C%A8%ED%82%A4%EC%A7%80%EC%97%90%EC%84%9C%20%EA%B9%94%EC%95%84%EB%B3%B8%20%EA%B2%83%EB%93%A4.png" width="40%" height="30%" ><br>
