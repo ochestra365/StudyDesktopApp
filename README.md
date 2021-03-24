@@ -1,5 +1,7 @@
 # StudyDesktopApp
 C# 데스크톱 앱 개발 학습 리포지터리(WPF및 MahApp방법도 추가)
+<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/%EC%88%98%EB%8B%AC.png" width="40%" height="30%" ><br><br>
+하느님..이해가 잘되게 해주세요..
 --------------
 ## StudyDesktopApp에 대하여!(Code Review를 항상 잘하고, Logic을 이해하고, 나만의 Algorithm을 구성하자!😆)
 ~~~
