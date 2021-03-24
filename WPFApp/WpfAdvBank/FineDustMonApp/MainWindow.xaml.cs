@@ -41,8 +41,10 @@ namespace FineDustMonApp
             {
                 if (r == 0) continue;
                 lstLabs.Add(sh.GetRow(r).Cells[1].ToString());//리스트에 행들을 다 읽어서 넣어주겠따.ㅇ
-                CboStations.ItemsSource = lstLabs;
+               
             }
+            CboStations.ItemsSource = lstLabs;
+
         }
     }
 }

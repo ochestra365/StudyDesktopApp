@@ -18,17 +18,17 @@
             x:Name="CboStations" 
             Grid.Row="0" Grid.Column="0" 
             Width="200" Margin="5"
-            SelectedIndex="0" ItemsSource="{Binding}"
+            ItemsSource="{Binding}"
             mah:TextBoxHelper.Watermark="측정소를 선택하세요"
             mah:TextBoxHelper.UseFloatingWatermark="True"
             mah:TextBoxHelper.ClearTextButton="True"
             >
-            <DataGrid 
+        </ComboBox>
+        <DataGrid 
                 x:Name="DgrFineDustInfos"
                 Grid.Row="1" Grid.Column="0" Margin="5"
                 AutoGenerateColumns="True" SelectionUnit="FullRow" ItemsSource="{Binding}"
                 Style="{StaticResource MahApps.Styles.DataGrid.Azure}">
-            </DataGrid>
-        </ComboBox>
+        </DataGrid>
     </Grid>
 </mah:MetroWindow>
