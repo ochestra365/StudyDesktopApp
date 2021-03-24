@@ -3,8 +3,10 @@ using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Xml;
 
 namespace FineDustMonApp
 {
@@ -14,7 +16,13 @@ namespace FineDustMonApp
     public partial class MainWindow : MetroWindow
     {
         private readonly string excelPath = $@"{AppDomain.CurrentDomain.BaseDirectory}busan_station_list.xls";
-        private readonly string openApiUrl = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?serviceKey=cbuOX7pcf5ks83BOnRHQuesdDZ446xEaHEr5az1XlAcQkkO1YS7LDBD1zEs4YkwqWx0IKRh8G%2FUXmQUYaHkP0Q%3D%3D&returnType=xml&numOfRows=100&pageNo=1&stationName=%EC%A2%85%EB%A1%9C%EA%B5%AC&dataTerm=DAILY&ver=1.0";
+        private string openApiUrl = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?" +
+            "serviceKey=cbuOX7pcf5ks83BOnRHQuesdDZ446xEaHEr5az1XlAcQkkO1YS7LDBD1zEs4YkwqWx0IKRh8G%2FUXmQUYaHkP0Q%3D%3D&" +//서비스 키는 본인의 것이다.
+            "returnType=xml&" +
+            "numOfRows=100&pageNo=1&" +
+            "ver=1.0&"+
+            "stationName=";
+        //요런 형식으로 바꿔주고, stationName만 읽는 형식으로 고쳐줘야 한다.
         public MainWindow()
         {
             InitializeComponent();
@@ -49,17 +57,24 @@ namespace FineDustMonApp
             catch (Exception ex)
             {
             }
-           
-
         }
 
         private void CboStations_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if(CboStations.SelectedItem!=null)
+            if(CboStations.SelectedItem!=null)//컬랙션에서 선택된 값들이 빈값이 아니면 아래의 로직을 실행한다.
             {
-                MessageBox.Show(CboStations.SelectedItem.ToString());
+                openApiUrl += CboStations.SelectedItem.ToString();//문자열로 다 날린다.
+                XmlDocument xml = new XmlDocument();
+                xml.Load(openApiUrl);
+                XmlNodeList xnList = xml.SelectNodes("/response/body/items");//xml의 body 부분만 사용해라 head부분은 필요없다.
+
+                foreach (XmlNode item in xnList)
+                {
+                    //Debug.WriteLine($"dateTime : {item["datetime"].InnerText}");-->시간을 잘 불러오는 가 확인해본 구문이다.
+                }
             }
-            
         }
+
+        private List<FineDustInfo> lstResult;
     }
 }
