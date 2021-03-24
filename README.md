@@ -200,6 +200,11 @@ NUGET 패키지!<br><br>
 
 <img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/%EC%BB%A4%EC%97%AC%EC%9A%B4%20%EC%88%98%EB%8B%AC.png" width="40%" height="30%" ><br><br>
 어려우니까 귀여운 수달을 보고 힐링해야 한다.<br><br>
+상당히 오류가 많이 발생했는데, 원인은 다음과 같다. 빌드만 되고 실행은 안될수 있음.(F5 눌러서 디버깅 잡아봐야 한다.)
+1. 원본 엑셀파일의 공백 부분을 다 날려줘야 한다.
+2. XAML의 컨텐츠 구분을 잘 해줘야 한다.
+3. cs에서 중복 for문을 적을 때, 호출되는 값을 잘 적어 줘야 한다.
+4. 파일명을 잘 적어서 컴파일러가 호출이 잘 되게 읽어줘야 한다.
 NPOI Load 예제
 ~~~
 using MahApps.Metro.Controls;
