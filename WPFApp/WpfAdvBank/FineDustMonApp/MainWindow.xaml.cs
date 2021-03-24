@@ -14,7 +14,7 @@ namespace FineDustMonApp
     public partial class MainWindow : MetroWindow
     {
         private readonly string excelPath = $@"{AppDomain.CurrentDomain.BaseDirectory}busan_station_list.xls";
-
+        private readonly string openApiUrl = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?serviceKey=cbuOX7pcf5ks83BOnRHQuesdDZ446xEaHEr5az1XlAcQkkO1YS7LDBD1zEs4YkwqWx0IKRh8G%2FUXmQUYaHkP0Q%3D%3D&returnType=xml&numOfRows=100&pageNo=1&stationName=%EC%A2%85%EB%A1%9C%EA%B5%AC&dataTerm=DAILY&ver=1.0";
         public MainWindow()
         {
             InitializeComponent();
@@ -56,7 +56,10 @@ namespace FineDustMonApp
         private void CboStations_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if(CboStations.SelectedItem!=null)
-            MessageBox.Show(CboStations.SelectedItem.ToString());
+            {
+                MessageBox.Show(CboStations.SelectedItem.ToString());
+            }
+            
         }
     }
 }
