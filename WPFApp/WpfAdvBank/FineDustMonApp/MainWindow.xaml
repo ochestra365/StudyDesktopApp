@@ -22,8 +22,9 @@
             mah:TextBoxHelper.Watermark="측정소를 선택하세요"
             mah:TextBoxHelper.UseFloatingWatermark="True"
             mah:TextBoxHelper.ClearTextButton="True"
-            >
+            SelectionChanged="CboStations_SelectionChanged">
         </ComboBox>
+        
         <DataGrid 
                 x:Name="DgrFineDustInfos"
                 Grid.Row="1" Grid.Column="0" Margin="5"

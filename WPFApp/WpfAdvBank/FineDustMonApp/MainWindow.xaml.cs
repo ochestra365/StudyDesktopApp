@@ -52,5 +52,10 @@ namespace FineDustMonApp
            
 
         }
+
+        private void CboStations_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            MessageBox.Show(CboStations.SelectedItem.ToString());
+        }
     }
 }
