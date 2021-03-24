@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfTestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTestApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="600" Initialized="Window_Initialized">
+    <Window.Resources>
+        <local:PersonList x:Key="PersonListData"/>
+        <DataTemplate x:Key="PersonListBoxTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding FirstName}"/>
+                <TextBlock Text="{Binding LastName}" Margin="5,0"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel HorizontalAlignment="Center">
+        <TextBlock Text="멀티미디어 패널" FontSize="18" FontFamily="NanumGothic" FontWeight="Bold" Width="Auto" Margin="10"/>
+        <ListBox x:Name="LsbPerson" Width="200" ItemsSource="{Binding Source={StaticResource PersonListData}}"
+                 IsSynchronizedWithCurrentItem="True"
+                 ItemTemplate="{StaticResource ResourceKey=PersonListBoxTemplate}">
+        </ListBox>
+        <TextBlock Text="Normal Format" Margin="0,10,0,0"/>
+        <TextBlock x:Name="TxtNormal" Text="{Binding SelectedItem, ElementName=LsbPerson}" Background="Silver">
+           
+        </TextBlock>
+        <TextBlock Text="Last Name, First Name" Margin="0,10,0,0"/>
+        <TextBlock x:Name="TxtLastFirst" Text="{Binding SelectedItem, ElementName=LsbPerson}" Background="Silver">
+
+        </TextBlock>
+    </StackPanel>
+</Window>
