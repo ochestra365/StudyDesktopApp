@@ -69,7 +69,8 @@ namespace FineDustMonApp
 
             if(CboStations.SelectedItem!=null)//컬랙션에서 선택된 값들이 빈값이 아니면 아래의 로직을 실행한다.
             {
-                openApiUrl += CboStations.SelectedItem.ToString();//문자열로 다 날린다.
+                //openApiUrl += CboStations.SelectedItem.ToString();//문자열로 다 날린다.//문자열로 다 날린다.
+                openApiUrl = openApiUrl.Substring(0, openApiUrl.LastIndexOf("=") + 1) + CboStations.SelectedItem.ToString();//-의 값은 int값으로 돌려놓을 수 없다. 
                 XmlDocument xml = new XmlDocument();
                 xml.Load(openApiUrl);
                 XmlNodeList xnList = xml.SelectNodes("/response/body/items/item");//xml의 body 부분만 사용해라 head부분은 필요없다. 그리고 소속된 경로를 잘 설정해주어야 한다.
@@ -78,9 +79,9 @@ namespace FineDustMonApp
                 {
                     //Debug.WriteLine($"dateTime : {item["datetime"].InnerText}");-->시간을 잘 불러오는 가 확인해본 구문이다.
                     lstResult.Add(new FineDustInfo() { 
-                    DataTime = item["dataTime"].InnerText//,
-                  /*  Khai=int.Parse(item["khaiValue"].InnerText),
-                    So2=float.Parse(item["so2Value"].InnerText),*/
+                    DataTime = item["dataTime"].InnerText,//,
+                    Khai=item["khaiValue"].InnerText,
+                    //So2=item["so2Value"].InnerText),
                     });
                 }
             }
